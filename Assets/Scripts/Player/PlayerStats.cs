@@ -8,9 +8,20 @@ public class PlayerStats : MonoBehaviour
 
     protected float health;
 
-    protected float shotSpeedModifier; 
+    protected float shotSpeedModifier;
 
+    protected float defenseModifier;
 
-    
+    private void Awake()
+    {
+        movementSpeed = 5.0f;
 
+        damageModifier = 1f;
+
+        health = 100f; 
+
+        shotSpeedModifier = 1f;
+
+        defenseModifier = 1f;
+    }
 }

@@ -9,10 +9,7 @@ public class PlayerMovement : PlayerStats
 
     private float _moveSpeedMultiplier = 1f; 
 
-    private void Awake()
-    {
-        movementSpeed = 5.0f; 
-    }
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
