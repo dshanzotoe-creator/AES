@@ -12,6 +12,10 @@ public class PlayerStats : MonoBehaviour
 
     protected float defenseModifier;
 
+    protected float rangeModifier;
+
+    protected float projectileSpawnRateModifier; 
+
     private void Awake()
     {
         movementSpeed = 5.0f;
@@ -23,5 +27,9 @@ public class PlayerStats : MonoBehaviour
         shotSpeedModifier = 1f;
 
         defenseModifier = 1f;
+
+        rangeModifier = 1f;
+
+        projectileSpawnRateModifier = 1f;
     }
 }
