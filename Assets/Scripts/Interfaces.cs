@@ -7,3 +7,8 @@ public interface IDamageable
 
     public void Death(); 
 }
+
+public interface IProjectile
+{
+    public void MoveTowardsTarget(GameObject target);
+}

@@ -5,8 +5,6 @@ public class EnemyMovement : MonoBehaviour
 {
     NavMeshAgent agent;
 
-    static float agentDrift = 0.00001f;
-
     GameObject _player; 
 
 
