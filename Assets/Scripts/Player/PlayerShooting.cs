@@ -7,12 +7,19 @@ public class PlayerShooting : PlayerStats
     //Add logic where the bullets that are spawned changes with the element(s) picked. 
     [SerializeField] GameObject projectile;
 
+    [SerializeField] ElemntData[] elements = new ElemntData[2];
+
+    bool originalElementActive = true;
+
     [Header("Variables")]
     [SerializeField] float range = 10.0f;
     [SerializeField] float shotSpeedCooldown = 2.0f;
     
     
     [SerializeField] List<GameObject> enemies = new List<GameObject>();
+
+
+   
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
