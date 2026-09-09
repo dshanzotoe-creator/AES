@@ -5,8 +5,6 @@ public class EnemyMovement : MonoBehaviour
 {
     NavMeshAgent agent;
 
-    [SerializeField] float _movementSpeed = 1.0f;
-
     static float agentDrift = 0.00001f;
 
     GameObject _player; 
@@ -30,6 +28,6 @@ public class EnemyMovement : MonoBehaviour
 
     void SetDestination(GameObject target)
     {
-        agent.SetDestination(target.transform.position); 
+        agent.SetDestination(target.transform.position);
     }
 }
