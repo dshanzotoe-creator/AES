@@ -1,0 +1,35 @@
+using UnityEngine;
+using UnityEngine.AI;
+
+public class EnemyMovement : MonoBehaviour
+{
+    NavMeshAgent agent;
+
+    [SerializeField] float _movementSpeed = 1.0f;
+
+    static float agentDrift = 0.00001f;
+
+    GameObject _player; 
+
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false; 
+        agent.updateUpAxis = false;
+
+        _player = GameObject.FindGameObjectWithTag("Player"); 
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+       SetDestination(_player);
+    }
+
+    void SetDestination(GameObject target)
+    {
+        agent.SetDestination(target.transform.position); 
+    }
+}
