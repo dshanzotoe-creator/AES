@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75e0c9ea9d754754baa217323eb6704f, type: 3}
-  m_Name: FireBall
+  m_Name: WaterBoltData
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileData
-  icon: {fileID: -2413806693520163455, guid: 02d925dbe3798e64cb7203218ebc55bb, type: 3}
-  damage: 5
-  speed: 3.5
+  icon: {fileID: 0}
+  damage: 3
+  speed: 6
   lifeTime: 5
-  projectileSpawnRate: 2
-  maxSpawns: 5
+  projectileSpawnRate: 1.5
+  maxSpawns: 8

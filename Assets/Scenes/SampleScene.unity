@@ -770,6 +770,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShooting
   projectile: {fileID: 0}
+  elements:
+  - {fileID: 0}
+  - {fileID: 0}
   range: 10
   shotSpeedCooldown: 2
   enemies: []

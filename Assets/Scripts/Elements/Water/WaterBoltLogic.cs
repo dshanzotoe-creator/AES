@@ -1,20 +1,22 @@
 using System.Collections;
 using UnityEngine;
 
-public class FireBallLogic : ProjectileClass
+public class WaterBoltLogic : ProjectileClass
 {
-    [SerializeField] private ProjectileData _projectileData;
+
+    [SerializeField] private ProjectileData _waterBoltData;
 
     Rigidbody2D rb;
-    SpriteRenderer _sprite; 
+    SpriteRenderer _sprite;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _sprite = GetComponent<SpriteRenderer>();
-        _sprite.sprite = _projectileData.icon;
+        _sprite.sprite = _waterBoltData.icon;
         rb = GetComponent<Rigidbody2D>();
-        StartCoroutine(DestroyBullet(_projectileData.lifeTime));
+        StartCoroutine(DestroyBullet(_waterBoltData.lifeTime));
+
     }
 
     // Update is called once per frame
@@ -22,5 +24,4 @@ public class FireBallLogic : ProjectileClass
     {
         
     }
-
 }
