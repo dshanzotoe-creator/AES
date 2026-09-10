@@ -7,7 +7,7 @@ public class PlayerShooting : PlayerStats
     //Add logic where the bullets that are spawned changes with the element(s) picked. 
     public GameObject projectile;
 
-    [SerializeField] ElemntData[] elements = new ElemntData[2];
+  //  [SerializeField] ElemntData[] elements = new ElemntData[2];
 
     bool originalElementActive = true;
 
@@ -18,7 +18,7 @@ public class PlayerShooting : PlayerStats
     
     [SerializeField] List<GameObject> enemies = new List<GameObject>();
 
-
+    GameObject enemyToShootAt;
    
 
 
@@ -61,6 +61,7 @@ public class PlayerShooting : PlayerStats
             {
                 closestDistance = distanceFromEnemy;
                 closestEnemy = enemy;
+                enemyToShootAt = closestEnemy;
             }
         }
     }

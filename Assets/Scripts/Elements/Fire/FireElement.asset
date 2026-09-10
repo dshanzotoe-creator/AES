@@ -16,4 +16,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 0f4b583bd31682544948741f18d26dc9, type: 3}
   projectile: {fileID: 5160859907914011487, guid: ef82dc30969746049b1ad3114bcac96c, type: 3}
   ultimateCooldown: 0
-  abillities: []
+  abillities:
+  - {fileID: 4406217523302491680, guid: a9ba08a4bc53b414f85da66e9d1aed73, type: 3}
+  - {fileID: 2769214550825213426, guid: fdb0bc55d82fb6548b2fa7a775e5711d, type: 3}
+  - {fileID: 8876221664941312568, guid: 820ca56b55d5ca24488701e8b97ed82c, type: 3}
