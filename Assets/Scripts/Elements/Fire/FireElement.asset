@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireElement
   m_EditorClassIdentifier: Assembly-CSharp::ElemntData
   elementName: Fire
-  icon: {fileID: 0}
-  projectile: {fileID: 0}
+  icon: {fileID: 21300000, guid: 0f4b583bd31682544948741f18d26dc9, type: 3}
+  projectile: {fileID: 5160859907914011487, guid: ef82dc30969746049b1ad3114bcac96c, type: 3}
   ultimateCooldown: 0
   abillities: []

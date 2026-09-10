@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerShooting : PlayerStats
 {
     //Add logic where the bullets that are spawned changes with the element(s) picked. 
-    [SerializeField] GameObject projectile;
+    public GameObject projectile;
 
     [SerializeField] ElemntData[] elements = new ElemntData[2];
 

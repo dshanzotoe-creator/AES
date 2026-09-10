@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75e0c9ea9d754754baa217323eb6704f, type: 3}
   m_Name: FireBall
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileData
-  icon: {fileID: -2413806693520163455, guid: 02d925dbe3798e64cb7203218ebc55bb, type: 3}
+  icon: {fileID: 21300000, guid: d37588b3b9566284499e10d37c101133, type: 3}
   damage: 5
   speed: 3.5
   lifeTime: 5
