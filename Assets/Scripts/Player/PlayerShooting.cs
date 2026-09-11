@@ -14,18 +14,24 @@ public class PlayerShooting : PlayerStats
     [Header("Variables")]
     [SerializeField] float range = 10.0f;
     [SerializeField] float shotSpeedCooldown = 2.0f;
+
+    ProjectileData projectileData;
+
+    float oldShotSpeedCooldown;
+
+    float projectilesSpawned = 0f;
     
     
     [SerializeField] List<GameObject> enemies = new List<GameObject>();
 
-    GameObject enemyToShootAt;
+    public GameObject enemyToShootAt;
    
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        oldShotSpeedCooldown = shotSpeedCooldown;
     }
 
     // Update is called once per frame
@@ -33,6 +39,18 @@ public class PlayerShooting : PlayerStats
     {
         AddEnemyToList(); 
         FindClosestEnemy();
+
+        if (enemyToShootAt != null)
+        {
+            shotSpeedCooldown -= Time.deltaTime; 
+
+            if(shotSpeedCooldown <= 0)
+            {
+                ShootProjectile();
+            }
+
+        }
+        
     }
 
     void AddEnemyToList()
@@ -74,10 +92,15 @@ public class PlayerShooting : PlayerStats
     }
 
 
-    IEnumerator ShootProjectile()
+    void ShootProjectile()
     {
+        projectileData = projectile.GetComponent<ProjectileData>();
+
         //Add projectile logic once elements are completed.
-        yield return null;
+        while(projectilesSpawned < projectileData.maxSpawns)
+        {
+            Instantiate(projectile, transform.position, Quaternion.identity);
+        }
     }
 
     

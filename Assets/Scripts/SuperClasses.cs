@@ -3,6 +3,18 @@ using System.Collections;
 
 public class ProjectileClass : MonoBehaviour
 {
+    ProjectileData projectileData;
+
+    PlayerShooting playerShooting;
+
+    private void Start()
+    {
+        projectileData = GetComponent<ProjectileData>();
+        playerShooting = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerShooting>();
+        MoveTowardsTarget(playerShooting.enemyToShootAt, projectileData.speed, gameObject.GetComponent<Rigidbody2D>());
+        StartCoroutine(DestroyBullet(projectileData.lifeTime));
+    }
+
     public void MoveTowardsTarget(GameObject target, float projectileSpeed, Rigidbody2D rb)
     {
         Vector2 direction = (target.transform.position - transform.position).normalized;

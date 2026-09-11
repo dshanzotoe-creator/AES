@@ -43,28 +43,26 @@ public class UpgradeHandler : MonoBehaviour
     public void ActivateButtonLogic()
     {
         //Make it so that the game pauses when the player levels up and gets to choose their ability
-        List<GameObject> abilities = elementAbilities;
+        List<GameObject> abilities = new List<GameObject>(elementAbilities);
         int randomNumber = 0;
 
         if (!isUpgrading && IsThereAbilities())
         {
             PauseGame();
 
-            for (int i = 0; i < upgradeButtons.Length; i++)
+            int amountChoices = Mathf.Min(upgradeButtons.Length, abilities.Count);
+
+            for (int j = 0; j < upgradeButtons.Length; j++)
             {
-                GameObject button = upgradeButtons[i];
+                upgradeButtons[j].SetActive(j < amountChoices);
+            }
 
-                button.SetActive(true);
-
-                for(int j = elementAbilities.Count; j < upgradeButtons.Length; j++)
-                {
-                    upgradeButtons[j].SetActive(false);
-                }
-
+            for (int i = 0; i < amountChoices; i++)
+            {
                 randomNumber = Random.Range(0, abilities.Count);
                 
-                buttonAbilities[i] = elementAbilities[randomNumber];
-                button.name = elementAbilities[randomNumber].name;
+                buttonAbilities[i] = abilities[randomNumber];
+                upgradeButtons[i].name = abilities[randomNumber].name;
                 abilities.RemoveAt(randomNumber);
             }
 
