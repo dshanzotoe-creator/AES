@@ -85,7 +85,8 @@ public class UpgradeHandler : MonoBehaviour
     {
         //Make it so that when whatever button is pressed, the player gets that upgrade. 
         //IF THE UPGRADE IS AN ABILITY remove the ability from the elemental abilities list. 
-       
+        GameObject ability = this.gameObject
+        pEH.abilities.Add()
 
     }
 
@@ -102,6 +103,11 @@ public class UpgradeHandler : MonoBehaviour
         isUpgrading = true; 
     } 
 
+    private void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        isUpgrading = false;
+    }
 
 
     bool IsThereAbilities()

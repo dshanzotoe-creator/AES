@@ -11,7 +11,7 @@ public class PlayerElementHandler : MonoBehaviour
 
     [SerializeField] InputAction _switchElementAction;
 
-    [SerializeField]  List<GameObject> abilities = new List<GameObject>();
+    public List<GameObject> abilities = new List<GameObject>();
 
     //Every ability, including passives, are going to be created as prefabs. 
     //So once the player clicks on the button to unlock an ability, that ability gets added to the list.
