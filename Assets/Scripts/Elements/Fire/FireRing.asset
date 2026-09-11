@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireRing
   m_EditorClassIdentifier: Assembly-CSharp::AbilityData
   abilityName: FireRing
-  abilityDescription: 
+  abilityDescription: Gain a ring of fire around the player, dealing contact damage.
   damage: 6
   cooldown: 0
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: b9199d7faec321a40816d14ce6a649c3, type: 3}

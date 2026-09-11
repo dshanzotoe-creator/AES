@@ -16,5 +16,5 @@ MonoBehaviour:
   damage: 5
   speed: 10
   lifeTime: 5
-  projectileSpawnRate: 2
+  projectileSpawnRate: 0.6
   maxSpawns: 5

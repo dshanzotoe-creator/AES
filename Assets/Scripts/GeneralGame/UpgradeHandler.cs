@@ -42,7 +42,6 @@ public class UpgradeHandler : MonoBehaviour
 
     public void ActivateButtonLogic()
     {
-        //Make it so that the game pauses when the player levels up and gets to choose their ability
         List<GameObject> abilities = new List<GameObject>(elementAbilities);
         int randomNumber = 0;
 
@@ -72,8 +71,6 @@ public class UpgradeHandler : MonoBehaviour
 
     public void ChooseUpgrade(int buttonNumber)
     {
-        //Make it so that when whatever button is pressed, the player gets that upgrade. 
-        //IF THE UPGRADE IS AN ABILITY remove the ability from the elemental abilities list. 
         GameObject ability = buttonAbilities[buttonNumber];
         pEH.abilities.Add(ability);
         elementAbilities.Remove(ability);

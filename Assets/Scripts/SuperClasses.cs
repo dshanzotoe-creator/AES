@@ -16,6 +16,13 @@ public class ProjectileClass : MonoBehaviour
 
     public void MoveTowardsTarget(GameObject target, float projectileSpeed, Rigidbody2D rb)
     {
+        if(target == null)
+        {
+            Destroy(this.gameObject); return;
+        }
+        
+            
+
         Vector2 direction = (target.transform.position - transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, angle + -90);

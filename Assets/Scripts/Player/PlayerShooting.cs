@@ -17,10 +17,9 @@ public class PlayerShooting : PlayerStats
 
     public ProjectileData projectileData;
 
-    float oldShotSpeedCooldown;
+    float originalShotSpeedCooldown;
 
-    float projectilesSpawned = 0f;
-    
+    bool shooting = false;
     
     [SerializeField] List<GameObject> enemies = new List<GameObject>();
 
@@ -31,7 +30,7 @@ public class PlayerShooting : PlayerStats
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        oldShotSpeedCooldown = shotSpeedCooldown;
+        originalShotSpeedCooldown = shotSpeedCooldown;
     }
 
     // Update is called once per frame
@@ -44,9 +43,13 @@ public class PlayerShooting : PlayerStats
         {
             shotSpeedCooldown -= Time.deltaTime; 
 
-            if(shotSpeedCooldown <= 0)
+            if(shotSpeedCooldown <= 0 && !shooting)
             {
-                ShootProjectile();
+                StartCoroutine(ShootProjectile());
+            }
+            else
+            {
+                StopCoroutine(ShootProjectile());
             }
 
         }
@@ -93,15 +96,30 @@ public class PlayerShooting : PlayerStats
     }
 
 
-    void ShootProjectile()
+    IEnumerator ShootProjectile()
     {
+        shooting = true;
+        int projectilesSpawned = 0; 
         projectileData = projectile.GetComponent<ProjectileClass>().Data;
 
         //Add projectile logic once elements are completed.
-        if (projectilesSpawned < projectileData.maxSpawns)
+        while (projectilesSpawned < projectileData.maxSpawns)
         {
+            if (enemyToShootAt == null)
+            {
+                break; 
+            }
+
             Instantiate(projectile, transform.position, Quaternion.identity);
+
+            projectilesSpawned++;
+            yield return new WaitForSeconds(projectileData.projectileSpawnRate);
         }
+
+        shotSpeedCooldown = originalShotSpeedCooldown / projectileSpawnRateModifier;
+        shooting = false;
+
+        yield return null;
     }
 
     
