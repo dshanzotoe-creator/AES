@@ -8,11 +8,14 @@ public class PlayerLevelSystem : MonoBehaviour
     [SerializeField] float xpNeededForNextLevel = 10;
     [SerializeField] float currentXP;
 
+    [SerializeField] UpgradeHandler upgradeHandler;
+
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        upgradeHandler = GameObject.Find("GameManager").GetComponent<UpgradeHandler>();
         currentLevel = staringLevel;
         currentXP = 0; 
     }
@@ -27,10 +30,12 @@ public class PlayerLevelSystem : MonoBehaviour
     {
         //Picking Up Object Adds Xp Logic
 
-        while(currentXP >= xpNeededForNextLevel && currentLevel < maxLevel)
+        while(currentXP >= xpNeededForNextLevel && currentLevel < maxLevel && !upgradeHandler.isUpgrading)
         {
             currentXP -= xpNeededForNextLevel;
-            currentXP = Mathf.Clamp(currentXP, 0, xpNeededForNextLevel);
+            currentXP = Mathf.RoundToInt(currentXP);
+
+            AddLevel();
 
             if (currentLevel < 10)
             {
@@ -41,9 +46,9 @@ public class PlayerLevelSystem : MonoBehaviour
                 xpNeededForNextLevel *= 1.36f;          
             }
 
-            xpNeededForNextLevel = Mathf.RoundToInt(xpNeededForNextLevel);
+             
 
-            AddLevel();
+            xpNeededForNextLevel = Mathf.RoundToInt(xpNeededForNextLevel);
         }
     }
 
@@ -55,6 +60,8 @@ public class PlayerLevelSystem : MonoBehaviour
             currentLevel = Mathf.Clamp(currentLevel, staringLevel, maxLevel);
 
             //Add choosing ability/upgrade after leveling up
+            upgradeHandler.ActivateButtonLogic(); 
+
         }
     }
 }

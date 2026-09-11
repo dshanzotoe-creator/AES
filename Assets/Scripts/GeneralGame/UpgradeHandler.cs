@@ -8,8 +8,8 @@ public class UpgradeHandler : MonoBehaviour
 
     [SerializeField]  List<GameObject> elementAbilities = new List<GameObject>();
 
-
-    Button[] upgradeButtons = new Button[3];
+    public bool isUpgrading = false; 
+    [SerializeField] GameObject[] upgradeButtons = new GameObject[3];
 
 
 
@@ -40,27 +40,67 @@ public class UpgradeHandler : MonoBehaviour
         }
     }
 
-    void ButtonPopUp()
+    public void ActivateButtonLogic()
     {
-        //Make it so that the game pauses when the player levels up and gets to choose their ability. 
-    }
+        //Make it so that the game pauses when the player levels up and gets to choose their ability
+        List<int> storedNumbers = new List<int>();
+        int randomNumber = 0;
 
-    void SetButtonData()
-    {
-        //Set the icon, abilitydata, and abilityname on each button.
-        //Respective to what ability is rolled to it. 
+        if (!isUpgrading)
+        {
+            PauseGame();
+
+            foreach (GameObject button in upgradeButtons)
+            {
+                button.SetActive(true);
+                if (IsThereAbilities())
+                {
+                 restart:
+                    randomNumber = Random.Range(0, elementAbilities.Count);
+                    Debug.Log(randomNumber);
+
+                    if (storedNumbers.Count != 0)
+                    {
+                        foreach (int number in storedNumbers)
+                        {
+                            if (number == randomNumber)
+                            {
+                                Debug.Log("Dup detected");
+                                goto restart; 
+                            }
+                                
+                        }
+                    }
+
+                    button.name = elementAbilities[randomNumber].name;
+                }
+
+                storedNumbers.Add(randomNumber);
+            } 
+        }
+
     }
 
     public void ChooseUpgrade()
     {
         //Make it so that when whatever button is pressed, the player gets that upgrade. 
         //IF THE UPGRADE IS AN ABILITY remove the ability from the elemental abilities list. 
+       
+
     }
 
     void RemoveElementalability(GameObject ability)
     {
         //It's in the name. Write the logic to remove whatever ability was chosen. 
     }
+
+
+    private void PauseGame()
+    {
+        Debug.Log("Pasuing Game");
+        Time.timeScale = 0f;
+        isUpgrading = true; 
+    } 
 
 
 
