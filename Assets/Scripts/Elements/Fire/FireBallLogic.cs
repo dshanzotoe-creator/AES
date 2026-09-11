@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class FireBallLogic : ProjectileClass
 {
-    [SerializeField] private ProjectileData _projectileData;
 
     Rigidbody2D rb;
     SpriteRenderer _sprite; 
@@ -12,9 +11,9 @@ public class FireBallLogic : ProjectileClass
     void Start()
     {
         _sprite = GetComponent<SpriteRenderer>();
-        _sprite.sprite = _projectileData.icon;
+        _sprite.sprite = Data.icon;
         rb = GetComponent<Rigidbody2D>();
-        StartCoroutine(DestroyBullet(_projectileData.lifeTime));
+        StartCoroutine(DestroyBullet(Data.lifeTime));
     }
 
     // Update is called once per frame

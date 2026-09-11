@@ -15,7 +15,7 @@ public class PlayerShooting : PlayerStats
     [SerializeField] float range = 10.0f;
     [SerializeField] float shotSpeedCooldown = 2.0f;
 
-    ProjectileData projectileData;
+    public ProjectileData projectileData;
 
     float oldShotSpeedCooldown;
 
@@ -94,10 +94,10 @@ public class PlayerShooting : PlayerStats
 
     void ShootProjectile()
     {
-        projectileData = projectile.GetComponent<ProjectileData>();
+        projectileData = projectile.GetComponent<ProjectileClass>().Data;
 
         //Add projectile logic once elements are completed.
-        while(projectilesSpawned < projectileData.maxSpawns)
+        if (projectilesSpawned < projectileData.maxSpawns)
         {
             Instantiate(projectile, transform.position, Quaternion.identity);
         }
