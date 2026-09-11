@@ -69,6 +69,7 @@ public class PlayerShooting : PlayerStats
     void FindClosestEnemy()
     {
         GameObject closestEnemy = null;
+        enemyToShootAt = null;
         float closestDistance = range; 
 
         foreach (GameObject enemy in enemies)

@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74a58d9bac713b84bbc55cee96354741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireBallLogic
-  _projectileData: {fileID: 11400000, guid: 697bad3245b16054fa99cf1b57aedb4f, type: 2}
+  projectileData: {fileID: 11400000, guid: 697bad3245b16054fa99cf1b57aedb4f, type: 2}
 --- !u!50 &2272820720258869531
 Rigidbody2D:
   serializedVersion: 5
