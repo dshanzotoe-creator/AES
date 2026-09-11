@@ -4,14 +4,14 @@ using UnityEngine.UIElements;
 
 public class UpgradeHandler : MonoBehaviour
 {
-    [SerializeField] PlayerElementHandler pEH; 
+    [SerializeField] PlayerElementHandler pEH;
 
-    [SerializeField]  List<GameObject> elementAbilities = new List<GameObject>();
+    [SerializeField] List<GameObject> elementAbilities = new List<GameObject>();
 
-    public bool isUpgrading = false; 
+    public bool isUpgrading = false;
     [SerializeField] GameObject[] upgradeButtons = new GameObject[3];
 
-
+    GameObject[] buttonAbilities = new GameObject[3];
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -43,56 +43,45 @@ public class UpgradeHandler : MonoBehaviour
     public void ActivateButtonLogic()
     {
         //Make it so that the game pauses when the player levels up and gets to choose their ability
-        List<int> storedNumbers = new List<int>();
+        List<GameObject> abilities = elementAbilities;
         int randomNumber = 0;
 
-        if (!isUpgrading)
+        if (!isUpgrading && IsThereAbilities())
         {
             PauseGame();
 
-            foreach (GameObject button in upgradeButtons)
+            for (int i = 0; i < upgradeButtons.Length; i++)
             {
+                GameObject button = upgradeButtons[i];
+
                 button.SetActive(true);
-                if (IsThereAbilities())
+
+                for(int j = elementAbilities.Count; j < upgradeButtons.Length; j++)
                 {
-                 restart:
-                    randomNumber = Random.Range(0, elementAbilities.Count);
-                    Debug.Log(randomNumber);
-
-                    if (storedNumbers.Count != 0)
-                    {
-                        foreach (int number in storedNumbers)
-                        {
-                            if (number == randomNumber)
-                            {
-                                Debug.Log("Dup detected");
-                                goto restart; 
-                            }
-                                
-                        }
-                    }
-
-                    button.name = elementAbilities[randomNumber].name;
+                    upgradeButtons[j].SetActive(false);
                 }
 
-                storedNumbers.Add(randomNumber);
-            } 
+                randomNumber = Random.Range(0, abilities.Count);
+                
+                buttonAbilities[i] = elementAbilities[randomNumber];
+                button.name = elementAbilities[randomNumber].name;
+                abilities.RemoveAt(randomNumber);
+            }
+
         }
 
     }
 
-    public void ChooseUpgrade()
+    public void ChooseUpgrade(int buttonNumber)
     {
         //Make it so that when whatever button is pressed, the player gets that upgrade. 
         //IF THE UPGRADE IS AN ABILITY remove the ability from the elemental abilities list. 
-        GameObject ability = this.gameObject
-        pEH.abilities.Add()
+        GameObject ability = buttonAbilities[buttonNumber];
+        pEH.abilities.Add(ability);
+        elementAbilities.Remove(ability);
 
-    }
+        ResumeGame();
 
-    void RemoveElementalability(GameObject ability)
-    {
-        //It's in the name. Write the logic to remove whatever ability was chosen. 
     }
 
 
@@ -107,6 +96,11 @@ public class UpgradeHandler : MonoBehaviour
     {
         Time.timeScale = 1f;
         isUpgrading = false;
+
+        foreach (GameObject button in upgradeButtons)
+        {
+            button.SetActive(false);
+        }
     }
 
 

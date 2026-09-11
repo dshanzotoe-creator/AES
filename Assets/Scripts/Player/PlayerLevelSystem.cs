@@ -43,7 +43,7 @@ public class PlayerLevelSystem : MonoBehaviour
             }
             else
             {
-                xpNeededForNextLevel *= 1.36f;          
+                xpNeededForNextLevel *= 1.37f;          
             }
 
              
