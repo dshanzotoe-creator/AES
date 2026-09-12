@@ -14,7 +14,7 @@ public class ProjectileClass : MonoBehaviour
         StartCoroutine(DestroyBullet(Data.lifeTime));
     }
 
-    public void MoveTowardsTarget(GameObject target, float projectileSpeed, Rigidbody2D rb)
+    public virtual void MoveTowardsTarget(GameObject target, float projectileSpeed, Rigidbody2D rb)
     {
         if(target == null)
         {
@@ -34,5 +34,16 @@ public class ProjectileClass : MonoBehaviour
     {
         yield return new WaitForSeconds(lifetime);
         Destroy(gameObject);
+    }
+}
+
+
+public class AbilityClass : MonoBehaviour
+{
+    GameObject player;
+
+    public virtual void Update()
+    {
+        transform.position = player.transform.position;
     }
 }

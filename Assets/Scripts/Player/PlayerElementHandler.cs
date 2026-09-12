@@ -58,6 +58,11 @@ public class PlayerElementHandler : MonoBehaviour
         _playerShooting.projectile = _currentElement.projectile;
     }
 
+    public void SpawnPlayerAbilities(GameObject ability)
+    {
+            Instantiate(ability, transform.position, Quaternion.identity);   
+    }
+
     bool IsOriginalElementActive()
     {
         return _currentElement == _chosenElements[0]; 

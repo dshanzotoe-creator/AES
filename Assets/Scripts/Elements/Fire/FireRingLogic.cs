@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FireRingLogic : MonoBehaviour
+public class FireRingLogic : AbilityClass
 {
     [SerializeField] AbilityData data;
 
@@ -21,7 +21,7 @@ public class FireRingLogic : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
         Rotate();
         transform.position = player.transform.position;

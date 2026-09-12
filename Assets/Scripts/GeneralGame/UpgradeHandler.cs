@@ -73,6 +73,7 @@ public class UpgradeHandler : MonoBehaviour
     {
         GameObject ability = buttonAbilities[buttonNumber];
         pEH.abilities.Add(ability);
+        pEH.SpawnPlayerAbilities(ability);
         elementAbilities.Remove(ability);
 
         ResumeGame();
