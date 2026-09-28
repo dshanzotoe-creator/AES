@@ -18,3 +18,4 @@ MonoBehaviour:
   lifeTime: 3
   projectileSpawnRate: 0.6
   maxSpawns: 5
+  collideAmount: 2

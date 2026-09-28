@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FireRingLogic : AbilityClass
@@ -9,7 +10,9 @@ public class FireRingLogic : AbilityClass
     GameObject player; 
 
     SpriteRenderer sprite;
-    
+
+    Dictionary<GameObject, float> nextHitTime = new Dictionary<GameObject, float>();
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,5 +34,28 @@ public class FireRingLogic : AbilityClass
     {
         transform.rotation = Quaternion.Euler(0f, 0f, transform.eulerAngles.z + rotationSpeed * Time.deltaTime);
     
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Enemy"))
+        {
+            GameObject enemy = collision.gameObject;
+
+            if (!nextHitTime.ContainsKey(enemy))
+            {
+                nextHitTime[enemy] = 0f; 
+            }
+
+            if(Time.time >= nextHitTime[enemy])
+            {
+                Debug.Log("Enemy hit by fire ring");
+                //collision.GetComponent<EnemyHealth>().TakeDamage(data.damage);
+                nextHitTime[enemy] = Time.time + data.cooldown;
+            }
+
+            Debug.Log("Enemy hit by fire ring");
+            //collision.GetComponent<EnemyHealth>().TakeDamage(data.damage);
+        }
     }
 }

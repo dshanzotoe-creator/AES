@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerShooting : PlayerStats
@@ -75,8 +76,15 @@ public class PlayerShooting : PlayerStats
         enemyToShootAt = null;
         float closestDistance = range; 
 
+        
+        for(int i = enemies.Count - 1; i >= 0; i--)
+        {
+            if (enemies[i] == null) enemies.RemoveAt(i);
+        }
+
         foreach (GameObject enemy in enemies)
         {
+
             float distanceFromEnemy = Vector2.Distance(transform.position, enemy.transform.position);
 
             if(distanceFromEnemy < closestDistance)

@@ -9,6 +9,8 @@ public class FireBallLogic : ProjectileClass
 
     PlayerShooting playerShooting;
 
+    int collideAmount; 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,6 +26,17 @@ public class FireBallLogic : ProjectileClass
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))    
+        {
+            collision.GetComponent<EnemyContacts>().TakeDamage(Data.damage);
+            collideAmount++; 
+
+            if(collideAmount >= Data.collideAmount) Destroy(this.gameObject);
+        }
     }
 
 }

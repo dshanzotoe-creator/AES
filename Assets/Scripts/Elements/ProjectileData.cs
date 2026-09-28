@@ -14,4 +14,6 @@ public class ProjectileData : ScriptableObject
     public float projectileSpawnRate;
 
     public int maxSpawns;
+
+    public int collideAmount;
 }
