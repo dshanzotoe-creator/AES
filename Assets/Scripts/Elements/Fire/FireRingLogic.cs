@@ -36,7 +36,7 @@ public class FireRingLogic : AbilityClass
     
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.CompareTag("Enemy"))
         {
@@ -50,12 +50,9 @@ public class FireRingLogic : AbilityClass
             if(Time.time >= nextHitTime[enemy])
             {
                 Debug.Log("Enemy hit by fire ring");
-                //collision.GetComponent<EnemyHealth>().TakeDamage(data.damage);
+                collision.GetComponent<EnemyContacts>().TakeDamage(data.damage);
                 nextHitTime[enemy] = Time.time + data.cooldown;
             }
-
-            Debug.Log("Enemy hit by fire ring");
-            //collision.GetComponent<EnemyHealth>().TakeDamage(data.damage);
         }
     }
 }

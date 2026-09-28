@@ -24,6 +24,8 @@ public class PlayerShooting : PlayerStats
     
     [SerializeField] List<GameObject> enemies = new List<GameObject>();
 
+    private List<GameObject> abilityProjectilePool = new List<GameObject>();
+
     public GameObject enemyToShootAt;
    
 
@@ -128,6 +130,11 @@ public class PlayerShooting : PlayerStats
         shooting = false;
 
         yield return null;
+    }
+
+    void ShootAbilityProjectilel()
+    {
+
     }
 
     
