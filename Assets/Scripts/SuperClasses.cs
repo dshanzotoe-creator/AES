@@ -8,7 +8,7 @@ public class ProjectileClass : MonoBehaviour
     public ProjectileData Data => projectileData;
 
 
-    private void Start()
+    public virtual void Start()
     {
 
         StartCoroutine(DestroyBullet(Data.lifeTime));

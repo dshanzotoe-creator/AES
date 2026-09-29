@@ -12,10 +12,10 @@ public class FireWallLogic : ProjectileClass
     PlayerShooting playerShooting;
 
 
-    private void Start()
+    public override void Start()
     {
         _sprite = GetComponent<SpriteRenderer>();
-        _sprite.sprite = Data.icon;
+        _sprite.sprite = data.icon;
         rb = GetComponent<Rigidbody2D>();
         playerShooting = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerShooting>();
         SpawnFirelWall(); 
@@ -24,6 +24,5 @@ public class FireWallLogic : ProjectileClass
     void SpawnFirelWall()
     {
         MoveTowardsTarget(playerShooting.enemyToShootAt, Data.speed, gameObject.GetComponent<Rigidbody2D>());
-        StartCoroutine(DestroyBullet(Data.lifeTime));
     }
 }

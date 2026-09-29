@@ -29,10 +29,6 @@ public class PlayerShooting : PlayerStats
     public GameObject enemyToShootAt;
 
     private Dictionary<GameObject, float> abilityCooldownTimers = new Dictionary<GameObject, float>();
-
-    [SerializeField] protected AbilityData abilityData;
-
-    public AbilityData Data => abilityData;
    
 
 
@@ -145,15 +141,18 @@ public class PlayerShooting : PlayerStats
 
         foreach(GameObject abilityProjectile in foundAbilityProjectiles)
         {
+            if (abilityProjectilePool.Contains(abilityProjectile)) continue;
 
-            if (!abilityProjectilePool.Contains(abilityProjectile))
-            {
-                abilityProjectilePool.Add(abilityProjectile);
+            AbilityProjectile _abilityScript = abilityProjectile.GetComponent<AbilityProjectile>();
 
-                abilityCooldownTimers.Add(abilityProjectile, Data.cooldown);
+            if (_abilityScript == null || _abilityScript.Data == null) continue; 
 
-                abilityProjectile.SetActive(false);
-            }
+
+            abilityProjectilePool.Add(abilityProjectile);
+
+            abilityCooldownTimers.Add(abilityProjectile, _abilityScript.Data.cooldown);
+
+            abilityProjectile.SetActive(false);
         }
     }
 
@@ -161,20 +160,19 @@ public class PlayerShooting : PlayerStats
     {
         foreach(GameObject abilityProjectile in abilityProjectilePool)
         {
-            if (abilityProjectile == null) continue;
-
-            abilityCooldownTimers[abilityProjectile] -= Time.deltaTime;
-
-            if (abilityCooldownTimers[abilityProjectile] <= 0)
+            if (abilityCooldownTimers[abilityProjectile] <= 0f)
             {
                 if (enemyToShootAt == null) continue;
 
                 if (abilityProjectile.activeSelf) continue;
 
-                AbilityData _abilityData = abilityProjectile.GetComponent<AbilityData>();
+                AbilityProjectile _abilityScript = abilityProjectile.GetComponent<AbilityProjectile>();
 
-                abilityProjectile.transform.position = transform.position; 
+                abilityProjectile.transform.position = transform.position;
 
+                abilityProjectile.SetActive(true);
+
+                abilityCooldownTimers[abilityProjectile] = _abilityScript.Data.cooldown; 
             }
         }
     }

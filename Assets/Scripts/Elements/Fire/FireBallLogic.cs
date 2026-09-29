@@ -12,7 +12,7 @@ public class FireBallLogic : ProjectileClass
     int collideAmount; 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void Start()
     {
         _sprite = GetComponent<SpriteRenderer>();
         _sprite.sprite = Data.icon;
