@@ -11,6 +11,10 @@ public class PlayerElementHandler : MonoBehaviour
 
     [SerializeField] InputAction _switchElementAction;
 
+    float swapCooldown = 3f;
+
+    float _originalSwapCooldown; 
+
     public List<GameObject> abilities = new List<GameObject>();
 
     //Every ability, including passives, are going to be created as prefabs. 
@@ -20,18 +24,20 @@ public class PlayerElementHandler : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        _originalSwapCooldown = swapCooldown; 
         SetOriginalElement();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_switchElementAction.WasPressedThisFrame())
+        swapCooldown -= Time.deltaTime; 
+
+        if (_switchElementAction.WasPressedThisFrame() && swapCooldown <= 0)
         {
 
            StartCoroutine(SwitchElement());
-
+            swapCooldown = _originalSwapCooldown;
         }
     }
 

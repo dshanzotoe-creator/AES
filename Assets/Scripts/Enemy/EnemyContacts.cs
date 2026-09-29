@@ -6,26 +6,28 @@ public class EnemyContacts : MonoBehaviour, IDamageable
 
     public EnemyData Data => enemyData;
 
-    private float currentHealth;
+    [SerializeField] private float currentHealth;
 
     private void Start()
     {
         currentHealth = Data.Health;
+
+       
     }
 
 
-
-
-    public void TakeDamage(float damage)
+    private void Update()
     {
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             Death();
         }
-        else
-        {
+    }
+
+    public void TakeDamage(float damage)
+    {
+ 
             currentHealth -= damage;
-        }
     }
 
     public void Death()

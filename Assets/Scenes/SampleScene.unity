@@ -1353,6 +1353,7 @@ MonoBehaviour:
       m_Action: Switch Element
       m_Flags: 0
     m_Flags: 0
+  _swapCooldown: 3
   abilities: []
 --- !u!1 &677124526
 GameObject:

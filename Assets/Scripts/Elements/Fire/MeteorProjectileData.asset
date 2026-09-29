@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75e0c9ea9d754754baa217323eb6704f, type: 3}
-  m_Name: WaterBoltData
+  m_Name: MeteorProjectileData
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileData
-  icon: {fileID: 21300000, guid: 5d7f25e57c977bf419cb30620d775e67, type: 3}
-  damage: 3
-  speed: 14
-  lifeTime: 5
-  projectileSpawnRate: 0.4
-  maxSpawns: 8
-  collideAmount: 4
+  icon: {fileID: 0}
+  damage: 0
+  speed: 7
+  lifeTime: 8
+  projectileSpawnRate: 0
+  maxSpawns: 0
+  collideAmount: 0

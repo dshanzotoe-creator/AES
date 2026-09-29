@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerShooting : PlayerStats
@@ -44,6 +43,8 @@ public class PlayerShooting : PlayerStats
         AddEnemyToList(); 
         FindClosestEnemy();
         HandleAbilityProjectiles();
+
+        projectileData = projectile.GetComponent<ProjectileClass>().Data;
 
         if (enemyToShootAt != null)
         {
@@ -113,7 +114,6 @@ public class PlayerShooting : PlayerStats
     {
         shooting = true;
         int projectilesSpawned = 0; 
-        projectileData = projectile.GetComponent<ProjectileClass>().Data;
 
         //Add projectile logic once elements are completed.
         while (projectilesSpawned < projectileData.maxSpawns)

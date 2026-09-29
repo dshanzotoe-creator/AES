@@ -1,26 +1,36 @@
-using System.Collections;
+
 using UnityEngine;
 
 public class WaterBoltLogic : ProjectileClass
 {
 
-    [SerializeField] private ProjectileData _waterBoltData;
-
     Rigidbody2D rb;
     SpriteRenderer _sprite;
 
+    PlayerShooting playerShooting;
+
+    int collideAmount;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void Start()
     {
         _sprite = GetComponent<SpriteRenderer>();
-        _sprite.sprite = _waterBoltData.icon;
+        _sprite.sprite = Data.icon;
         rb = GetComponent<Rigidbody2D>();
+        playerShooting = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerShooting>();
+        MoveTowardsTarget(playerShooting.enemyToShootAt, Data.speed, gameObject.GetComponent<Rigidbody2D>());
 
     }
 
-    // Update is called once per frame
-    void Update()
+      private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.CompareTag("Enemy"))
+        {
+            collision.GetComponent<EnemyContacts>().TakeDamage(Data.damage);
+            collideAmount++;
+
+            if (collideAmount >= Data.collideAmount) Destroy(this.gameObject);
+        }
     }
 }
+
