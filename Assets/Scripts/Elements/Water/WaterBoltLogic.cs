@@ -23,7 +23,7 @@ public class WaterBoltLogic : ProjectileClass
     }
 
       private void OnTriggerEnter2D(Collider2D collision)
-    {
+      {
         if (collision.CompareTag("Enemy"))
         {
             collision.GetComponent<EnemyContacts>().TakeDamage(Data.damage);
@@ -31,6 +31,6 @@ public class WaterBoltLogic : ProjectileClass
 
             if (collideAmount >= Data.collideAmount) Destroy(this.gameObject);
         }
-    }
+      }
 }
 
