@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4160383408403985768}
   m_Layer: 0
   m_Name: FireWall
-  m_TagString: Untagged
+  m_TagString: AbilityProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
