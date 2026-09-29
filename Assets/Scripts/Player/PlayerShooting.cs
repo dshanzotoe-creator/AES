@@ -24,7 +24,15 @@ public class PlayerShooting : PlayerStats
     
     [SerializeField] List<GameObject> enemies = new List<GameObject>();
 
+    [SerializeField] private List<GameObject> abilityProjectilePool = new List<GameObject>();
+
     public GameObject enemyToShootAt;
+
+    private Dictionary<GameObject, float> abilityCooldownTimers = new Dictionary<GameObject, float>();
+
+    [SerializeField] protected AbilityData abilityData;
+
+    public AbilityData Data => abilityData;
    
 
 
@@ -39,6 +47,7 @@ public class PlayerShooting : PlayerStats
     {
         AddEnemyToList(); 
         FindClosestEnemy();
+        HandleAbilityProjectiles();
 
         if (enemyToShootAt != null)
         {
@@ -130,5 +139,43 @@ public class PlayerShooting : PlayerStats
         yield return null;
     }
 
-    
+    public void CheckForAbilityProjectile()
+    {
+        GameObject[] foundAbilityProjectiles = GameObject.FindGameObjectsWithTag("AbilityProjectile");
+
+        foreach(GameObject abilityProjectile in foundAbilityProjectiles)
+        {
+
+            if (!abilityProjectilePool.Contains(abilityProjectile))
+            {
+                abilityProjectilePool.Add(abilityProjectile);
+
+                abilityCooldownTimers.Add(abilityProjectile, Data.cooldown);
+
+                abilityProjectile.SetActive(false);
+            }
+        }
+    }
+
+    void HandleAbilityProjectiles()
+    {
+        foreach(GameObject abilityProjectile in abilityProjectilePool)
+        {
+            if (abilityProjectile == null) continue;
+
+            abilityCooldownTimers[abilityProjectile] -= Time.deltaTime;
+
+            if (abilityCooldownTimers[abilityProjectile] <= 0)
+            {
+                if (enemyToShootAt == null) continue;
+
+                if (abilityProjectile.activeSelf) continue;
+
+                AbilityData _abilityData = abilityProjectile.GetComponent<AbilityData>();
+
+                abilityProjectile.transform.position = transform.position; 
+
+            }
+        }
+    }
 }

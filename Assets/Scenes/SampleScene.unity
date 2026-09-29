@@ -1291,6 +1291,7 @@ MonoBehaviour:
   shotSpeedCooldown: 2
   projectileData: {fileID: 0}
   enemies: []
+  abilityProjectilePool: []
   enemyToShootAt: {fileID: 0}
 --- !u!114 &670720233
 MonoBehaviour:
@@ -2138,6 +2139,7 @@ MonoBehaviour:
   - {fileID: 70727153}
   - {fileID: 2065741149}
   - {fileID: 677124526}
+  playerShooting: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

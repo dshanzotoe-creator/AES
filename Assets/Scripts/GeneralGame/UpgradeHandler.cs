@@ -13,10 +13,13 @@ public class UpgradeHandler : MonoBehaviour
 
     GameObject[] buttonAbilities = new GameObject[3];
 
+    [SerializeField] PlayerShooting playerShooting; 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         GetElementalAbilities();
+       
     }
 
     // Update is called once per frame
@@ -29,8 +32,9 @@ public class UpgradeHandler : MonoBehaviour
     void GetElementalAbilities()     //I feel like a genius doing basic ass shit without AI loooooooool
     {
         pEH = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerElementHandler>();
+        playerShooting = pEH.GetComponent<PlayerShooting>();
 
-        foreach(ElemntData element in pEH._chosenElements)
+        foreach (ElemntData element in pEH._chosenElements)
         {
             for (int i = 0; i < element.abillities.Length; i++)
             {
@@ -74,8 +78,13 @@ public class UpgradeHandler : MonoBehaviour
         GameObject ability = buttonAbilities[buttonNumber];
         pEH.abilities.Add(ability);
         pEH.SpawnPlayerAbilities(ability);
+
+             
+
         elementAbilities.Remove(ability);
 
+
+        playerShooting.CheckForAbilityProjectile();
         ResumeGame();
 
     }

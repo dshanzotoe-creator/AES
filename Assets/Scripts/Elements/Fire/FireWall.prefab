@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -4247852175888752660}
   - component: {fileID: 6255341745986428816}
   - component: {fileID: 4160383408403985768}
+  - component: {fileID: 4915288081249706981}
   m_Layer: 0
   m_Name: FireWall
   m_TagString: AbilityProjectile
@@ -183,3 +184,17 @@ PolygonCollider2D:
       - {x: 1.25, y: 0.4375}
       - {x: 1.3125, y: -0.8125}
   m_UseDelaunayMesh: 1
+--- !u!114 &4915288081249706981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2769214550825213426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22d9984090e1e2345b84f7afbf939046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FireWallLogic
+  projectileData: {fileID: 11400000, guid: 42cb43f2d5fe6d143a1ba3da2dc9ecc0, type: 2}
+  data: {fileID: 11400000, guid: 7ccd7f1d5453ee243a36e3e51ff09aec, type: 2}

@@ -18,8 +18,7 @@ public class FireWallLogic : ProjectileClass
         _sprite.sprite = Data.icon;
         rb = GetComponent<Rigidbody2D>();
         playerShooting = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerShooting>();
-        gameObject.SetActive(false);
-
+        SpawnFirelWall(); 
     }
 
     void SpawnFirelWall()
