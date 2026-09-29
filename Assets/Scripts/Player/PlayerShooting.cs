@@ -160,20 +160,33 @@ public class PlayerShooting : PlayerStats
     {
         foreach(GameObject abilityProjectile in abilityProjectilePool)
         {
-            if (abilityCooldownTimers[abilityProjectile] <= 0f)
-            {
-                if (enemyToShootAt == null) continue;
+            if (abilityProjectile == null) continue;
 
-                if (abilityProjectile.activeSelf) continue;
+            if (!abilityCooldownTimers.ContainsKey(abilityProjectile)) continue;
 
-                AbilityProjectile _abilityScript = abilityProjectile.GetComponent<AbilityProjectile>();
+            abilityCooldownTimers[abilityProjectile] -= Time.deltaTime;
 
-                abilityProjectile.transform.position = transform.position;
+            if (abilityCooldownTimers[abilityProjectile] > 0f) continue;
 
-                abilityProjectile.SetActive(true);
+            if (enemyToShootAt == null) continue;
 
-                abilityCooldownTimers[abilityProjectile] = _abilityScript.Data.cooldown; 
-            }
+            if (abilityProjectile.activeSelf) continue;
+
+            AbilityProjectile abilityScript = abilityProjectile.GetComponent<AbilityProjectile>();
+
+            ProjectileClass projectileClass = abilityProjectile.GetComponent<ProjectileClass>();
+
+            Rigidbody2D rb = abilityProjectile.GetComponent<Rigidbody2D>();
+
+            if (abilityScript == null || abilityScript.Data == null || projectileClass == null || projectileClass.Data == null || rb == null) continue;
+
+            abilityProjectile.transform.position = transform.position;
+
+            abilityProjectile.SetActive(true);
+
+            projectileClass.MoveTowardsTarget(enemyToShootAt, projectileClass.Data.speed, rb);
+
+            abilityCooldownTimers[abilityProjectile] = abilityScript.Data.cooldown; 
         }
     }
 }

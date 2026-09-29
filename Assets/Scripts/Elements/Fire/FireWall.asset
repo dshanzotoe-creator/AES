@@ -15,5 +15,5 @@ MonoBehaviour:
   abilityName: Fire Wall
   abilityDescription: 'Periodically shoot at wall of fire. '
   damage: 14
-  cooldown: 5
+  cooldown: 9
   icon: {fileID: 21300000, guid: 7dbd0a0a57369d042ba7d8d9fd0001d9, type: 3}

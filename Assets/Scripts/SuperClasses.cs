@@ -8,10 +8,9 @@ public class ProjectileClass : MonoBehaviour
     public ProjectileData Data => projectileData;
 
 
-    public virtual void Start()
+    protected virtual void Start()
     {
 
-        StartCoroutine(DestroyBullet(Data.lifeTime));
     }
 
     public virtual void MoveTowardsTarget(GameObject target, float projectileSpeed, Rigidbody2D rb)
@@ -29,11 +28,26 @@ public class ProjectileClass : MonoBehaviour
         rb.linearVelocity = direction * projectileSpeed;
     }
 
-
-    public IEnumerator DestroyBullet(float lifetime)
+    protected virtual void OnEnable()
     {
-        yield return new WaitForSeconds(lifetime);
-        Destroy(gameObject);
+        StartCoroutine(EndProjectileLifetime());
+    }
+
+    public IEnumerator EndProjectileLifetime()
+    {
+        yield return new WaitForSeconds(Data.lifeTime);
+
+        if (CompareTag("AbilityProjectile")) gameObject.SetActive(false);
+        else Destroy(gameObject); 
+    }
+
+    protected virtual void OnDisable()
+    {
+        StopAllCoroutines();
+
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+
+        if (rb != null) rb.linearVelocity = Vector2.zero; 
     }
 }
 

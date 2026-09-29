@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireWallLogic
   projectileData: {fileID: 11400000, guid: 42cb43f2d5fe6d143a1ba3da2dc9ecc0, type: 2}
-  data: {fileID: 11400000, guid: 7ccd7f1d5453ee243a36e3e51ff09aec, type: 2}
+  abData: {fileID: 11400000, guid: 7ccd7f1d5453ee243a36e3e51ff09aec, type: 2}
 --- !u!114 &-2365711552731518688
 MonoBehaviour:
   m_ObjectHideFlags: 0

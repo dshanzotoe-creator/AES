@@ -12,14 +12,13 @@ public class FireBallLogic : ProjectileClass
     int collideAmount; 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public override void Start()
+    protected override void Start()
     {
         _sprite = GetComponent<SpriteRenderer>();
         _sprite.sprite = Data.icon;
         rb = GetComponent<Rigidbody2D>();
         playerShooting = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerShooting>();
         MoveTowardsTarget(playerShooting.enemyToShootAt, Data.speed, gameObject.GetComponent<Rigidbody2D>());
-        StartCoroutine(DestroyBullet(Data.lifeTime));
     }
 
     // Update is called once per frame

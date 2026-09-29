@@ -3,26 +3,24 @@ using UnityEngine;
 public class FireWallLogic : ProjectileClass
 {
 
-    [SerializeField] AbilityData data;
+    [SerializeField] AbilityData abData;
 
     SpriteRenderer _sprite;
 
-    Rigidbody2D rb; 
-
-    PlayerShooting playerShooting;
 
 
-    public override void Start()
+    protected override void Start()
     {
         _sprite = GetComponent<SpriteRenderer>();
-        _sprite.sprite = data.icon;
-        rb = GetComponent<Rigidbody2D>();
-        playerShooting = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerShooting>();
-        SpawnFirelWall(); 
+        _sprite.sprite = abData.icon;
     }
 
-    void SpawnFirelWall()
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        MoveTowardsTarget(playerShooting.enemyToShootAt, Data.speed, gameObject.GetComponent<Rigidbody2D>());
+        if (collision.CompareTag("Enemy"))
+        {
+            collision.GetComponent<EnemyContacts>().TakeDamage(abData.damage);
+        }
     }
 }

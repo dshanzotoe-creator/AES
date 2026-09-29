@@ -15,7 +15,6 @@ public class WaterBoltLogic : ProjectileClass
         _sprite = GetComponent<SpriteRenderer>();
         _sprite.sprite = _waterBoltData.icon;
         rb = GetComponent<Rigidbody2D>();
-        StartCoroutine(DestroyBullet(_waterBoltData.lifeTime));
 
     }
 
