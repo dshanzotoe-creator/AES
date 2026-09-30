@@ -55,7 +55,7 @@ public class BubbleTurrentScript : MonoBehaviour
 
                 Vector3 bulletDirection = new Vector3(bulletDirectionX, bulletDirectionY, 0f);
 
-                float rotationZ = Mathf.Atan2(bulletDirection.y, bulletDirection.x) * Mathf.Rad2Deg;
+                float rotationZ = Mathf.Atan2(-bulletDirection.x, bulletDirection.y) * Mathf.Rad2Deg;
                 Quaternion bulletRotation = Quaternion.Euler(0f, 0f, rotationZ);
 
                 GameObject _bulletPrefab = Instantiate(bulletPrefab, transform.position, bulletRotation);
