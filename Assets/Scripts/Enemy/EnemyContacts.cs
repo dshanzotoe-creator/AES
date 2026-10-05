@@ -8,11 +8,15 @@ public class EnemyContacts : MonoBehaviour, IDamageable
 
     [SerializeField] private float currentHealth;
 
+
+    public void SetData(EnemyData newData)
+    {
+        enemyData = newData;
+    }
+
     private void Start()
     {
-        currentHealth = Data.Health;
-
-       
+        currentHealth = Data.Health;    
     }
 
 
@@ -27,7 +31,7 @@ public class EnemyContacts : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
  
-            currentHealth -= damage;
+        currentHealth -= damage;
     }
 
     public void Death()

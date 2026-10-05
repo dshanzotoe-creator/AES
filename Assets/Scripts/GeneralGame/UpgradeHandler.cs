@@ -3,103 +3,212 @@ using UnityEngine;
 
 public class UpgradeHandler : MonoBehaviour
 {
-    [SerializeField] PlayerElementHandler pEH;
+    [SerializeField] private PlayerElementHandler pEH;
 
-    [SerializeField] List<GameObject> elementAbilities = new List<GameObject>();
+    [SerializeField]
+    private List<GameObject> elementAbilities =
+        new List<GameObject>();
+
+
+    private Dictionary<GameObject, ElemntData> abilityOwners =
+        new Dictionary<GameObject, ElemntData>();
+
 
     public bool isUpgrading = false;
-    [SerializeField] GameObject[] upgradeButtons = new GameObject[3];
 
-    GameObject[] buttonAbilities = new GameObject[3];
 
-    [SerializeField] PlayerShooting playerShooting; 
+    [SerializeField]
+    private GameObject[] upgradeButtons =
+        new GameObject[3];
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    private GameObject[] buttonAbilities =
+        new GameObject[3];
+
+
+    private void Start()
     {
         GetElementalAbilities();
-       
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
 
-    void GetElementalAbilities()     //I feel like a genius doing basic ass shit without AI loooooooool
+
+
+    void GetElementalAbilities()
     {
-        pEH = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerElementHandler>();
-        playerShooting = pEH.GetComponent<PlayerShooting>();
+        pEH = GameObject
+            .FindGameObjectWithTag("Player")
+            .GetComponent<PlayerElementHandler>();
+
 
         foreach (ElemntData element in pEH._chosenElements)
         {
-            for (int i = 0; i < element.abillities.Length; i++)
+            foreach (GameObject ability in element.abillities)
             {
-                elementAbilities.Add(element.abillities[i]);
+                if (ability == null)
+                    continue;
+
+
+
+                elementAbilities.Add(ability);
+
+
+
+                if (!abilityOwners.ContainsKey(ability))
+                {
+                    abilityOwners.Add(
+                        ability,
+                        element
+                    );
+                }
             }
-           
         }
     }
+
+
 
     public void ActivateButtonLogic()
     {
-        List<GameObject> abilities = new List<GameObject>(elementAbilities);
-        int randomNumber = 0;
+        if (isUpgrading)
+            return;
 
-        if (!isUpgrading && IsThereAbilities())
+
+        if (!IsThereAbilities())
+            return;
+
+
+        PauseGame();
+
+
+
+        List<GameObject> availableAbilities =
+            new List<GameObject>(elementAbilities);
+
+
+        int amountChoices =
+            Mathf.Min(
+                upgradeButtons.Length,
+                availableAbilities.Count
+            );
+
+
+        for (int i = 0; i < upgradeButtons.Length; i++)
         {
-            PauseGame();
+            bool shouldBeActive =
+                i < amountChoices;
 
-            int amountChoices = Mathf.Min(upgradeButtons.Length, abilities.Count);
 
-            for (int j = 0; j < upgradeButtons.Length; j++)
-            {
-                upgradeButtons[j].SetActive(j < amountChoices);
-            }
+            upgradeButtons[i].SetActive(
+                shouldBeActive
+            );
 
-            for (int i = 0; i < amountChoices; i++)
-            {
-                randomNumber = Random.Range(0, abilities.Count);
-                
-                buttonAbilities[i] = abilities[randomNumber];
-                upgradeButtons[i].name = abilities[randomNumber].name;
-                abilities.RemoveAt(randomNumber);
-            }
 
+
+            buttonAbilities[i] = null;
         }
 
+
+
+        for (int i = 0; i < amountChoices; i++)
+        {
+            int randomNumber =
+                Random.Range(
+                    0,
+                    availableAbilities.Count
+                );
+
+
+            GameObject chosenAbility =
+                availableAbilities[randomNumber];
+
+
+            buttonAbilities[i] =
+                chosenAbility;
+
+
+            upgradeButtons[i].name =
+                chosenAbility.name;
+
+
+            availableAbilities.RemoveAt(
+                randomNumber
+            );
+        }
     }
+
+
 
     public void ChooseUpgrade(int buttonNumber)
     {
-        GameObject ability = buttonAbilities[buttonNumber];
-        pEH.abilities.Add(ability);
-        pEH.SpawnPlayerAbilities(ability);
-
-             
-
-        elementAbilities.Remove(ability);
+        if (buttonNumber < 0 ||
+            buttonNumber >= buttonAbilities.Length)
+        {
+            return;
+        }
 
 
-        playerShooting.CheckForAbilityProjectile();
+        GameObject ability =
+            buttonAbilities[buttonNumber];
+
+
+        if (ability == null)
+            return;
+
+
+        if (!abilityOwners.TryGetValue(
+                ability,
+                out ElemntData ownerElement))
+        {
+            Debug.LogError(
+                "Could not find element owner for: "
+                + ability.name
+            );
+
+            ResumeGame();
+
+            return;
+        }
+
+
+
+        pEH.SpawnPlayerAbilities(
+            ability,
+            ownerElement
+        );
+
+
+        elementAbilities.Remove(
+            ability
+        );
+
+
+        abilityOwners.Remove(
+            ability
+        );
+
+
         ResumeGame();
-
     }
+
 
 
     private void PauseGame()
     {
-        Debug.Log("Pasuing Game");
+        Debug.Log("Pausing Game");
+
         Time.timeScale = 0f;
-        isUpgrading = true; 
-    } 
+
+        isUpgrading = true;
+    }
+
+
 
     private void ResumeGame()
     {
         Time.timeScale = 1f;
+
         isUpgrading = false;
+
 
         foreach (GameObject button in upgradeButtons)
         {

@@ -6,78 +6,199 @@ using UnityEngine.InputSystem;
 public class PlayerElementHandler : MonoBehaviour
 {
     [SerializeField] public ElemntData[] _chosenElements = new ElemntData[2];
-    [SerializeField] ElemntData _currentElement; 
-    [SerializeField]  PlayerShooting _playerShooting;
 
-    [SerializeField] InputAction _switchElementAction;
+    [SerializeField] public ElemntData _currentElement;
 
-    float swapCooldown = 3f;
+    [SerializeField] private PlayerShooting _playerShooting;
 
-    float _originalSwapCooldown; 
+    [SerializeField] private InputAction _switchElementAction;
+
+    [SerializeField] private float swapCooldown = 3f;
+
+    private float _originalSwapCooldown;
+
 
     public List<GameObject> abilities = new List<GameObject>();
 
-    //Every ability, including passives, are going to be created as prefabs. 
-    //So once the player clicks on the button to unlock an ability, that ability gets added to the list.
+
+    private Dictionary<GameObject, ElemntData> abilityOwners
+        = new Dictionary<GameObject, ElemntData>();
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
-        _originalSwapCooldown = swapCooldown; 
+        _originalSwapCooldown = swapCooldown;
+
         SetOriginalElement();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void Update()
     {
-        swapCooldown -= Time.deltaTime; 
+        swapCooldown -= Time.deltaTime;
 
-        if (_switchElementAction.WasPressedThisFrame() && swapCooldown <= 0)
+
+        if (_switchElementAction.WasPressedThisFrame()
+            && swapCooldown <= 0f)
         {
+            StartCoroutine(SwitchElement());
 
-           StartCoroutine(SwitchElement());
             swapCooldown = _originalSwapCooldown;
         }
     }
 
+
     IEnumerator SwitchElement()
     {
+
         if (IsOriginalElementActive())
         {
             _currentElement = _chosenElements[1];
         }
         else
         {
-          _currentElement = _chosenElements[0];
+            _currentElement = _chosenElements[0];
         }
 
-        _playerShooting.projectile = _currentElement.projectile;
+
+        _playerShooting.projectile =
+            _currentElement.projectile;
+
+
+
+        _playerShooting.SetActiveElement(
+            _currentElement
+        );
+
+
+       UpdateNormalAbilities();
+
 
         yield return null;
     }
 
+
     void SetOriginalElement()
     {
         _playerShooting = GetComponent<PlayerShooting>();
-        _currentElement = _chosenElements[0];
-        _playerShooting.projectile = _currentElement.projectile;
+
+
+        _currentElement =
+            _chosenElements[0];
+
+
+        _playerShooting.projectile =
+            _currentElement.projectile;
+
+
+        _playerShooting.SetActiveElement(
+            _currentElement
+        );
     }
 
-    public void SpawnPlayerAbilities(GameObject ability)
+
+    public void SpawnPlayerAbilities(
+    GameObject ability,
+    ElemntData ownerElement)
     {
-            Instantiate(ability, transform.position, Quaternion.identity);   
+        GameObject spawnedAbility = Instantiate(
+            ability,
+            transform.position,
+            Quaternion.identity
+        );
+
+        abilities.Add(spawnedAbility);
+
+
+        abilityOwners.Add(
+            spawnedAbility,
+            ownerElement
+        );
+
+
+        AbilityProjectile abilityProjectile =
+            spawnedAbility.GetComponent<AbilityProjectile>();
+
+
+        if (abilityProjectile != null)
+        {
+            _playerShooting.RegisterAbilityProjectile(
+                spawnedAbility,
+                ownerElement
+            );
+
+            return;
+        }
+
+
+        spawnedAbility.SetActive(
+            ownerElement == _currentElement
+        );
     }
+
+
+
+    void UpdateNormalAbilities()
+    {
+        for (int i = abilities.Count - 1; i >= 0; i--)
+        {
+            GameObject ability = abilities[i];
+
+
+
+            if (ability == null)
+            {
+                abilities.RemoveAt(i);
+                continue;
+            }
+
+
+            if (!abilityOwners.ContainsKey(ability))
+                continue;
+
+
+            AbilityProjectile abilityProjectile =
+                ability.GetComponent<AbilityProjectile>();
+
+
+            if (abilityProjectile != null)
+                continue;
+
+
+            ElemntData ownerElement =
+                abilityOwners[ability];
+
+
+            bool shouldBeActive =
+                ownerElement == _currentElement;
+
+
+            if (shouldBeActive)
+            {
+                ability.transform.position =
+                    transform.position;
+            }
+
+
+            ability.SetActive(
+                shouldBeActive
+            );
+        }
+    }
+
 
     bool IsOriginalElementActive()
     {
-        return _currentElement == _chosenElements[0]; 
+        return _currentElement ==
+               _chosenElements[0];
     }
+
 
     private void OnEnable()
     {
         _switchElementAction.Enable();
     }
+
 
     private void OnDisable()
     {

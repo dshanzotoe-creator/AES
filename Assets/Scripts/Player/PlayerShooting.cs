@@ -4,189 +4,414 @@ using UnityEngine;
 
 public class PlayerShooting : PlayerStats
 {
-    //Add logic where the bullets that are spawned changes with the element(s) picked. 
+
+    [Header("Normal Projectile")]
+
     public GameObject projectile;
-
-  //  [SerializeField] ElemntData[] elements = new ElemntData[2];
-
-    bool originalElementActive = true;
-
-    [Header("Variables")]
-    [SerializeField] float range = 10.0f;
-    [SerializeField] float shotSpeedCooldown = 2.0f;
 
     public ProjectileData projectileData;
 
-    float originalShotSpeedCooldown;
 
-    bool shooting = false;
-    
-    [SerializeField] List<GameObject> enemies = new List<GameObject>();
 
-    [SerializeField] private List<GameObject> abilityProjectilePool = new List<GameObject>();
+    [Header("Variables")]
+
+    [SerializeField] private float range = 10f;
+
+    [SerializeField] private float shotSpeedCooldown = 2f;
+
+
+    private float originalShotSpeedCooldown;
+
+    private bool shooting = false;
+
+
+
+    [Header("Enemies")]
+
+    [SerializeField]
+    private List<GameObject> enemies =
+        new List<GameObject>();
+
 
     public GameObject enemyToShootAt;
 
-    private Dictionary<GameObject, float> abilityCooldownTimers = new Dictionary<GameObject, float>();
-   
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [Header("Ability Projectile Pool")]
+
+    [SerializeField]
+    private List<GameObject> abilityProjectilePool =
+        new List<GameObject>();
+
+
+
+    private Dictionary<GameObject, float> abilityCooldownTimers
+        = new Dictionary<GameObject, float>();
+
+
+    private Dictionary<GameObject, ElemntData> abilityElementOwners
+        = new Dictionary<GameObject, ElemntData>();
+
+
+
+    private ElemntData activeElement;
+
+
+
+    private void Start()
     {
-        originalShotSpeedCooldown = shotSpeedCooldown;
+        originalShotSpeedCooldown =
+            shotSpeedCooldown;
     }
 
-    // Update is called once per frame
-    void Update()
+
+
+    private void Update()
     {
-        AddEnemyToList(); 
+        AddEnemyToList();
+
         FindClosestEnemy();
+
         HandleAbilityProjectiles();
 
-        projectileData = projectile.GetComponent<ProjectileClass>().Data;
 
-        if (enemyToShootAt != null)
+
+        if (projectile != null)
         {
-            shotSpeedCooldown -= Time.deltaTime; 
+            ProjectileClass projectileClass =
+                projectile.GetComponent<ProjectileClass>();
 
-            if(shotSpeedCooldown <= 0 && !shooting)
-            {
-                StartCoroutine(ShootProjectile());
-            }
-            else
-            {
-                StopCoroutine(ShootProjectile());
-            }
 
+            if (projectileClass != null)
+            {
+                projectileData =
+                    projectileClass.Data;
+            }
         }
-        
+
+
+
+        if (enemyToShootAt != null
+            && projectileData != null)
+        {
+            shotSpeedCooldown -=
+                Time.deltaTime;
+
+
+            if (shotSpeedCooldown <= 0f
+                && !shooting)
+            {
+                StartCoroutine(
+                    ShootProjectile()
+                );
+            }
+        }
     }
+
+
+
+    IEnumerator ShootProjectile()
+    {
+        shooting = true;
+
+
+        int projectilesSpawned = 0;
+
+
+        while (projectilesSpawned
+               < projectileData.maxSpawns)
+        {
+            if (enemyToShootAt == null)
+            {
+                break;
+            }
+
+
+            Instantiate(
+                projectile,
+                transform.position,
+                Quaternion.identity
+            );
+
+
+            projectilesSpawned++;
+
+
+            yield return new WaitForSeconds(
+                projectileData.projectileSpawnRate
+            );
+        }
+
+
+        shotSpeedCooldown =
+            originalShotSpeedCooldown
+            / projectileSpawnRateModifier;
+
+
+        shooting = false;
+    }
+
 
     void AddEnemyToList()
     {
-        GameObject[] foundAllEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] foundAllEnemies =
+            GameObject.FindGameObjectsWithTag(
+                "Enemy"
+            );
 
-        foreach (GameObject enemy in foundAllEnemies)
+
+        foreach (GameObject enemy
+                 in foundAllEnemies)
         {
-            if(enemy != null && !enemies.Contains(enemy))
+            if (enemy != null
+                && !enemies.Contains(enemy))
             {
                 enemies.Add(enemy);
             }
         }
     }
 
+
+
+
     void FindClosestEnemy()
     {
-        GameObject closestEnemy = null;
         enemyToShootAt = null;
-        float closestDistance = range; 
 
-        
-        for(int i = enemies.Count - 1; i >= 0; i--)
+
+        float closestDistance =
+            range;
+
+
+       
+        for (int i = enemies.Count - 1;
+             i >= 0;
+             i--)
         {
-            if (enemies[i] == null) enemies.RemoveAt(i);
+            if (enemies[i] == null)
+            {
+                enemies.RemoveAt(i);
+            }
         }
 
-        foreach (GameObject enemy in enemies)
+
+        foreach (GameObject enemy
+                 in enemies)
         {
+            float distanceFromEnemy =
+                Vector2.Distance(
+                    transform.position,
+                    enemy.transform.position
+                );
 
-            float distanceFromEnemy = Vector2.Distance(transform.position, enemy.transform.position);
 
-            if(distanceFromEnemy < closestDistance)
+            if (distanceFromEnemy
+                < closestDistance)
             {
-                closestDistance = distanceFromEnemy;
-                closestEnemy = enemy;
-                enemyToShootAt = closestEnemy;
+                closestDistance =
+                    distanceFromEnemy;
+
+
+                enemyToShootAt =
+                    enemy;
             }
         }
     }
-    
 
-    private void OnDrawGizmos()
+
+
+    public void RegisterAbilityProjectile(
+        GameObject abilityProjectile,
+        ElemntData ownerElement)
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, range); 
-    }
+        if (abilityProjectile == null)
+            return;
 
 
-    IEnumerator ShootProjectile()
-    {
-        shooting = true;
-        int projectilesSpawned = 0; 
-
-        //Add projectile logic once elements are completed.
-        while (projectilesSpawned < projectileData.maxSpawns)
+        if (abilityProjectilePool.Contains(
+                abilityProjectile))
         {
-            if (enemyToShootAt == null)
-            {
-                break; 
-            }
-
-            Instantiate(projectile, transform.position, Quaternion.identity);
-
-            projectilesSpawned++;
-            yield return new WaitForSeconds(projectileData.projectileSpawnRate);
+            return;
         }
 
-        shotSpeedCooldown = originalShotSpeedCooldown / projectileSpawnRateModifier;
-        shooting = false;
 
-        yield return null;
-    }
+        AbilityProjectile abilityScript =
+            abilityProjectile
+                .GetComponent<AbilityProjectile>();
 
-    public void CheckForAbilityProjectile()
-    {
-        GameObject[] foundAbilityProjectiles = GameObject.FindGameObjectsWithTag("AbilityProjectile");
 
-        foreach(GameObject abilityProjectile in foundAbilityProjectiles)
+        if (abilityScript == null
+            || abilityScript.Data == null)
         {
-            if (abilityProjectilePool.Contains(abilityProjectile)) continue;
-
-            AbilityProjectile _abilityScript = abilityProjectile.GetComponent<AbilityProjectile>();
-
-            if (_abilityScript == null || _abilityScript.Data == null) continue; 
-
-
-            abilityProjectilePool.Add(abilityProjectile);
-
-            abilityCooldownTimers.Add(abilityProjectile, _abilityScript.Data.cooldown);
-
-            abilityProjectile.SetActive(false);
+            return;
         }
+
+
+        abilityProjectilePool.Add(
+            abilityProjectile
+        );
+
+
+        abilityElementOwners.Add(
+            abilityProjectile,
+            ownerElement
+        );
+
+
+        abilityCooldownTimers.Add(
+            abilityProjectile,
+            abilityScript.Data.cooldown
+        );
+
+
+        abilityProjectile.SetActive(false);
     }
+
+
+
+    public void SetActiveElement(
+        ElemntData element)
+    {
+
+
+        activeElement = element;
+    }
+
 
     void HandleAbilityProjectiles()
     {
-        foreach(GameObject abilityProjectile in abilityProjectilePool)
+        foreach (GameObject abilityProjectile
+                 in abilityProjectilePool)
         {
-            if (abilityProjectile == null) continue;
+            if (abilityProjectile == null)
+                continue;
 
-            if (!abilityCooldownTimers.ContainsKey(abilityProjectile)) continue;
 
-            abilityCooldownTimers[abilityProjectile] -= Time.deltaTime;
+            if (!abilityCooldownTimers
+                    .ContainsKey(abilityProjectile))
+            {
+                continue;
+            }
 
-            if (abilityCooldownTimers[abilityProjectile] > 0f) continue;
 
-            if (enemyToShootAt == null) continue;
+            if (!abilityElementOwners
+                    .ContainsKey(abilityProjectile))
+            {
+                continue;
+            }
 
-            if (abilityProjectile.activeSelf) continue;
 
-            AbilityProjectile abilityScript = abilityProjectile.GetComponent<AbilityProjectile>();
+            ElemntData ownerElement =
+                abilityElementOwners[
+                    abilityProjectile
+                ];
 
-            ProjectileClass projectileClass = abilityProjectile.GetComponent<ProjectileClass>();
 
-            Rigidbody2D rb = abilityProjectile.GetComponent<Rigidbody2D>();
 
-            if (abilityScript == null || abilityScript.Data == null || projectileClass == null || projectileClass.Data == null || rb == null) continue;
 
-            abilityProjectile.transform.position = transform.position;
+            if (ownerElement != activeElement)
+            {
+                continue;
+            }
+
+
+            abilityCooldownTimers[
+                abilityProjectile
+            ] -= Time.deltaTime;
+
+
+            if (abilityCooldownTimers[
+                    abilityProjectile
+                ] > 0f)
+            {
+                continue;
+            }
+
+
+            if (enemyToShootAt == null)
+                continue;
+
+
+            if (abilityProjectile.activeSelf)
+                continue;
+
+
+
+            AbilityProjectile abilityScript =
+                abilityProjectile
+                    .GetComponent<AbilityProjectile>();
+
+
+            ProjectileClass projectileClass =
+                abilityProjectile
+                    .GetComponent<ProjectileClass>();
+
+
+            Rigidbody2D rb =
+                abilityProjectile
+                    .GetComponent<Rigidbody2D>();
+
+
+            if (abilityScript == null)
+                continue;
+
+
+            if (abilityScript.Data == null)
+                continue;
+
+
+            if (projectileClass == null)
+                continue;
+
+
+            if (projectileClass.Data == null)
+                continue;
+
+
+            if (rb == null)
+                continue;
+
+
+
+            abilityProjectile.transform.position =
+                transform.position;
+
+
+
+            rb.linearVelocity =
+                Vector2.zero;
+
+            rb.angularVelocity =
+                0f;
+
 
             abilityProjectile.SetActive(true);
 
-            projectileClass.MoveTowardsTarget(enemyToShootAt, projectileClass.Data.speed, rb);
 
-            abilityCooldownTimers[abilityProjectile] = abilityScript.Data.cooldown; 
+            projectileClass.MoveTowardsTarget(
+                enemyToShootAt,
+                projectileClass.Data.speed,
+                rb
+            );
+
+
+
+            abilityCooldownTimers[
+                abilityProjectile
+            ] = abilityScript.Data.cooldown;
         }
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color =
+            Color.yellow;
+
+
+        Gizmos.DrawWireSphere(
+            transform.position,
+            range
+        );
     }
 }
