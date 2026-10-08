@@ -10,8 +10,6 @@ public class EnemyData : ScriptableObject
 
     public float Speed;
 
-    public int XpGained;
-
     public bool IsShootingEnemy; 
 
     public bool IsBoss;

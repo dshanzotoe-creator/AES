@@ -7,7 +7,9 @@ public class PlayerMovement : PlayerStats
 
     [SerializeField] InputAction _action;
 
-    private float _moveSpeedMultiplier = 1f; 
+    private float _moveSpeedMultiplier = 1f;
+
+    SpriteRenderer _spriteRend; 
 
 
 
@@ -16,6 +18,7 @@ public class PlayerMovement : PlayerStats
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _spriteRend = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -39,6 +42,15 @@ public class PlayerMovement : PlayerStats
         _direction.Normalize();
 
         _rb.linearVelocity = _direction * (movementSpeed * _moveSpeedMultiplier);
+
+        if(_direction.x < 0)
+        {
+            _spriteRend.flipX = true;
+        }
+        else if(_direction.x > 0)
+        {
+            _spriteRend.flipX = false;
+        }
     }
 
 

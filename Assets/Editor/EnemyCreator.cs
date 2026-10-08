@@ -14,8 +14,6 @@ public class EnemyCreator : EditorWindow
 
     private float movementSpeed = 5f;
 
-    private int xpGained = 10; 
-
     private Sprite enemySprite;
 
     private bool isBoss = false;
@@ -41,10 +39,6 @@ public class EnemyCreator : EditorWindow
         EditorGUILayout.Space(10);
 
         DrawStatsSection();
-
-        EditorGUILayout.Space(10);
-
-        DrawRewardsSection();
 
         EditorGUILayout.Space(10);
 
@@ -91,8 +85,6 @@ public class EnemyCreator : EditorWindow
         newEnemy.Damage = damage;
 
         newEnemy.Speed = movementSpeed;
-
-        newEnemy.XpGained = xpGained;
 
         newEnemy.IsBoss = isBoss;
 
@@ -201,17 +193,6 @@ public class EnemyCreator : EditorWindow
         );
     }
 
-    private void DrawRewardsSection()
-    {
-        GUILayout.Label(
-            "Rewards",
-            EditorStyles.boldLabel
-        );
-        xpGained = EditorGUILayout.IntField(
-            "XP Gained",
-            xpGained
-        );
-    }
 
     private void DrawBooleansSection()
     {
@@ -322,12 +303,6 @@ public class EnemyCreator : EditorWindow
        {
             EditorUtility.DisplayDialog("Error", "Enemy movement speed must be a non-negative value.", "OK");
 
-            return false;
-       }
-
-       if (xpGained < 0)
-       {
-            EditorUtility.DisplayDialog("Error", "XP gained must be a non-negative value.", "OK");
             return false;
        }
 

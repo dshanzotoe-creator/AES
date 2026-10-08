@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: EnemyProjectileData
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileData
   icon: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  damage: 3
-  speed: 6
+  damage: 5
+  speed: 11
   lifeTime: 2.5
   projectileSpawnRate: 0
   maxSpawns: 0

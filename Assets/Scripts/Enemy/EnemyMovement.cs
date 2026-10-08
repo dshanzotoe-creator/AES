@@ -5,7 +5,9 @@ public class EnemyMovement : MonoBehaviour
 {
     NavMeshAgent agent;
 
-    GameObject _player; 
+    GameObject _player;
+
+    SpriteRenderer sprite; 
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -15,7 +17,8 @@ public class EnemyMovement : MonoBehaviour
         agent.updateRotation = false; 
         agent.updateUpAxis = false;
 
-        _player = GameObject.FindGameObjectWithTag("Player"); 
+        _player = GameObject.FindGameObjectWithTag("Player");
+        sprite = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -23,6 +26,17 @@ public class EnemyMovement : MonoBehaviour
     {
 
       if(agent.enabled == false) return;
+
+        if (agent.desiredVelocity.x < -0.01f)
+        {
+            sprite.flipX = false;
+        }
+        else if (agent.desiredVelocity.x > 0.01f)
+        {
+            sprite.flipX = true;
+        }
+
+
 
         SetDestination(_player);
     }

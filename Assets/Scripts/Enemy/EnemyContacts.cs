@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyContacts : MonoBehaviour, IDamageable
@@ -5,6 +6,8 @@ public class EnemyContacts : MonoBehaviour, IDamageable
     [SerializeField] protected EnemyData enemyData;
 
     public EnemyData Data => enemyData;
+
+    [SerializeField] GameObject XPGem;
 
     [SerializeField] private float currentHealth;
 
@@ -34,8 +37,24 @@ public class EnemyContacts : MonoBehaviour, IDamageable
         currentHealth -= damage;
     }
 
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Player"))
+        {
+            IDamageable damageable = collision.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                damageable.TakeDamage(Data.Damage);
+            }
+        }
+    }
+
+
+
     public void Death()
     {
+        GameObject xpGem = Instantiate(XPGem, transform.position, Quaternion.identity);
         Destroy(this.gameObject);
     }
 }

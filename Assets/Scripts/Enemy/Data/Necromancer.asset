@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57c45f092ac1cfc4a80046aad78e9e20, type: 3}
-  m_Name: New Enemy
+  m_Name: Necromancer
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  Health: 20
+  Health: 15
   Damage: 10
   Speed: 5
-  XpGained: 10
   IsShootingEnemy: 1
   IsBoss: 0
-  prefab: {fileID: 8752092560344830377, guid: 002129a87c412ed4ba4a6ebe2f711ccf, type: 3}
-  agent: {fileID: 2658761179858169344, guid: 2860066fe5f8d4d43943011c4725c8f5, type: 3}
-  enemySprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  prefab: {fileID: 7776536262329928907, guid: a4a3d789ea812504f9c80f72d2583991, type: 3}
+  agent: {fileID: 0}
+  enemySprite: {fileID: -5501826210372199055, guid: 83dea6481220a2f459682ac114f548d5, type: 3}

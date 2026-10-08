@@ -16,7 +16,7 @@ public class PlayerStats : MonoBehaviour
 
     protected float projectileSpawnRateModifier; 
 
-    private void Awake()
+    protected virtual void Awake()
     {
         movementSpeed = 5.0f;
 

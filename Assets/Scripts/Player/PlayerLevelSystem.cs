@@ -6,7 +6,7 @@ public class PlayerLevelSystem : MonoBehaviour
     [SerializeField] int staringLevel = 1;
     [SerializeField] int currentLevel;
     [SerializeField] float xpNeededForNextLevel = 10;
-    [SerializeField] float currentXP;
+     public float currentXP;
 
     [SerializeField] UpgradeHandler upgradeHandler;
 

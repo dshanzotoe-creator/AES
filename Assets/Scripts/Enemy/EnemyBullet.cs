@@ -28,5 +28,16 @@ public class EnemyBullet : ProjectileClass
         
     }
 
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Player"))
+        {
+            IDamageable damageable = collision.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                damageable.TakeDamage(Data.damage);
+            }
+            Destroy(this.gameObject);
+        }
+    }
 }

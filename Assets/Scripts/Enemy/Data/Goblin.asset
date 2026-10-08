@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57c45f092ac1cfc4a80046aad78e9e20, type: 3}
-  m_Name: New Enemy
+  m_Name: Goblin
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  Health: 20
+  Health: 25
   Damage: 10
-  Speed: 5
-  XpGained: 10
-  IsShootingEnemy: 1
+  Speed: 3.5
+  IsShootingEnemy: 0
   IsBoss: 0
-  prefab: {fileID: 8752092560344830377, guid: 002129a87c412ed4ba4a6ebe2f711ccf, type: 3}
-  agent: {fileID: 2658761179858169344, guid: 2860066fe5f8d4d43943011c4725c8f5, type: 3}
-  enemySprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  prefab: {fileID: 5488806396506003864, guid: 5747c2c57f208d442a22e13d6131bc2c, type: 3}
+  agent: {fileID: 5816833276142516988, guid: 29a4690c1875127408cab8387a685bff, type: 3}
+  enemySprite: {fileID: 8749302817991680212, guid: 6144deb8bc2a27349846b29eef33a4a3, type: 3}
