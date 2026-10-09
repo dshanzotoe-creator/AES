@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68bcceb68659b5f4883ec172f458f075, type: 3}
   m_Name: Meteor
   m_EditorClassIdentifier: Assembly-CSharp::AbilityData
-  abilityName: Meteor
-  abilityDescription: 
+  abilityName: Meatball
+  abilityDescription: Periodically spawn a massive meatball of fire.
   damage: 25
   cooldown: 12
   icon: {fileID: 21300000, guid: 2a0bc5cd045d4504793aa71c8f1a30af, type: 3}

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradeHandler : MonoBehaviour
 {
@@ -94,15 +96,14 @@ public class UpgradeHandler : MonoBehaviour
 
         for (int i = 0; i < upgradeButtons.Length; i++)
         {
-            bool shouldBeActive =
-                i < amountChoices;
+            bool shouldBeActive = i < amountChoices;
 
 
-            upgradeButtons[i].SetActive(
-                shouldBeActive
-            );
+            upgradeButtons[i].SetActive(shouldBeActive);
 
-
+           
+            
+          
 
             buttonAbilities[i] = null;
         }
@@ -118,13 +119,25 @@ public class UpgradeHandler : MonoBehaviour
                 );
 
 
-            GameObject chosenAbility =
-                availableAbilities[randomNumber];
+            GameObject chosenAbility = availableAbilities[randomNumber];
 
+            AbilityData _abilityData = chosenAbility.GetComponent<AbilityReference>().Data;
 
-            buttonAbilities[i] =
-                chosenAbility;
+            buttonAbilities[i] = chosenAbility;
 
+            Transform button = upgradeButtons[i].transform;
+
+            Image img = button.Find("Icon").GetComponent<Image>();
+
+            TextMeshProUGUI title = button.Find("Title")
+                .GetComponent<TextMeshProUGUI>();
+
+            TextMeshProUGUI description = button.Find("Description")
+                .GetComponent<TextMeshProUGUI>();
+
+            img.sprite = _abilityData.icon;
+            title.text = _abilityData.abilityName;
+            description.text = _abilityData.abilityDescription;
 
             upgradeButtons[i].name =
                 chosenAbility.name;

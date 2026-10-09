@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5463256178003100242}
   - component: {fileID: -1398454360289191409}
+  - component: {fileID: 5012110384693439858}
   m_Layer: 0
   m_Name: BubbleTurretHandler
   m_TagString: Untagged
@@ -46,3 +47,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BubbleTurrentHandlerScript
   bubblePrefab: {fileID: 8473694979427023093, guid: 8cb130dfef5ed40418b4e95a78c3752a, type: 3}
   spawnCooldown: 7.5
+--- !u!114 &5012110384693439858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4706800350174661191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 088cc4dde95f67140b7e99554c4f6441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AbilityReference
+  abilityData: {fileID: 11400000, guid: cf8804640ced4354b965c0657bfd0b58, type: 2}

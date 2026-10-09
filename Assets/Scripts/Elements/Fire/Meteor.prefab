@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6251341827437226783}
   - component: {fileID: 7438657788451123818}
   - component: {fileID: 9061302979359798533}
+  - component: {fileID: 4460365570776683391}
   m_Layer: 0
   m_Name: Meteor
   m_TagString: AbilityProjectile
@@ -186,3 +187,16 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0.049901128, y: -0.019960523}
   m_Radius: 1.3392838
+--- !u!114 &4460365570776683391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8876221664941312568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 088cc4dde95f67140b7e99554c4f6441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AbilityReference
+  abilityData: {fileID: 11400000, guid: 7120d476795128441852a44a819c7d28, type: 2}

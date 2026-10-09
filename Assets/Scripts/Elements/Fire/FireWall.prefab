@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4160383408403985768}
   - component: {fileID: 4915288081249706981}
   - component: {fileID: -2365711552731518688}
+  - component: {fileID: 3761914962703797380}
   m_Layer: 0
   m_Name: FireWall
   m_TagString: AbilityProjectile
@@ -211,4 +212,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b884b1c2aa5c21043b1fef2278e0819d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AbilityProjectile
+  abilityData: {fileID: 11400000, guid: 7ccd7f1d5453ee243a36e3e51ff09aec, type: 2}
+--- !u!114 &3761914962703797380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2769214550825213426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 088cc4dde95f67140b7e99554c4f6441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AbilityReference
   abilityData: {fileID: 11400000, guid: 7ccd7f1d5453ee243a36e3e51ff09aec, type: 2}

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6320543891743556095}
   - component: {fileID: 5577298457432454467}
   - component: {fileID: 4109357710600847561}
+  - component: {fileID: -1672065099902013982}
   m_Layer: 0
   m_Name: FireRing
   m_TagString: Untagged
@@ -192,3 +193,16 @@ PolygonCollider2D:
       - {x: -0.3125, y: -1.4375}
       - {x: -0.4473018, y: -1.4266443}
   m_UseDelaunayMesh: 1
+--- !u!114 &-1672065099902013982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4406217523302491680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 088cc4dde95f67140b7e99554c4f6441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AbilityReference
+  abilityData: {fileID: 11400000, guid: db9e1e54cbcad0a479b8810b13c4de0d, type: 2}

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4450665508411058189}
   - component: {fileID: 7147568338023934894}
+  - component: {fileID: -3649611709430561367}
   m_Layer: 0
   m_Name: TidalBurstHandler
   m_TagString: Untagged
@@ -46,3 +47,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TidalBurstHandlerSCR
   tidalBurst: {fileID: 4417652117058477141, guid: d8af554d5a2e71746b33186b36f50a0f, type: 3}
   spawnCooldown: 4.5
+--- !u!114 &-3649611709430561367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2209699302680790301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 088cc4dde95f67140b7e99554c4f6441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AbilityReference
+  abilityData: {fileID: 11400000, guid: d7cded644329b56429c086a32217a052, type: 2}
