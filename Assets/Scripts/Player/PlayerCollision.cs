@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerCollision : PlayerStats, IDamageable
 {
-    float _currentHealth;
+    public float _currentHealth;
 
     float _maxHealth;
 
@@ -17,10 +17,13 @@ public class PlayerCollision : PlayerStats, IDamageable
 
     private bool _isInvincible = false; 
 
+    HandleHealthBar healthBar;
+
     protected override void Awake()
     {
       base.Awake();
        _spriteRenderer = GetComponent<SpriteRenderer>();
+        healthBar = GameObject.Find("GameManager").GetComponent<HandleHealthBar>();
 
     }
 
@@ -35,7 +38,6 @@ public class PlayerCollision : PlayerStats, IDamageable
     void Update()
     {
         Death();
-        Debug.Log(_currentHealth);
     }
 
 
@@ -46,6 +48,8 @@ public class PlayerCollision : PlayerStats, IDamageable
         int _roundedDamage = Mathf.RoundToInt(damage);
 
         _currentHealth -= _roundedDamage / defenseModifier;
+
+        healthBar.UpdateHealthBar(_maxHealth, _currentHealth);
 
         StartCoroutine(InvicibilityFrames());
     }
