@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TidalBurstHandlerSCR
   tidalBurst: {fileID: 4417652117058477141, guid: d8af554d5a2e71746b33186b36f50a0f, type: 3}
-  spawnCooldown: 4.5
+  spawnCooldown: 3
 --- !u!114 &-3649611709430561367
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -10,12 +11,12 @@ public class GameTimer : MonoBehaviour
     float timer = 0;
 
 
-    int last40Seconds = 0;
-    int lastOneHalfMinute = 0;
+    int last30Seconds = 0;
+    int last50Seconds = 0;
     int lastStage = 0;
     int lastBossTime = 0;
 
-
+    List<GameObject> enemiesInScene = new List<GameObject>();
     private void Awake()
     {
         enemySpawner = GetComponent<EnemySpawner>();
@@ -30,35 +31,41 @@ public class GameTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
 
         timer += Time.deltaTime;
 
-        if (enemySpawner.isBossSpawned) return; 
+        if (enemySpawner.isBossSpawned) return;
 
-
-        int current40Seconds = Mathf.FloorToInt(timer / 40f);
-        int currentOneHalfMinutes = Mathf.FloorToInt(timer / 90f);
+        AddEnemyToList();
+        RemoveEnemyFromList();
+        
+        int current30Seconds = Mathf.FloorToInt(timer / 30f);
+        int current50Seconds = Mathf.FloorToInt(timer / 50f);
         int currentBossTime = Mathf.FloorToInt(timer / 480);
 
         HandleTimerText();
         IncreaseSpawnIndex();
 
-        if (current40Seconds > last40Seconds)
+        if (current30Seconds > last30Seconds)
         {
             IncreaseMaximumSpawns();
-            last40Seconds = current40Seconds;
+            last30Seconds = current30Seconds;
         }
 
-        if (currentOneHalfMinutes > lastOneHalfMinute)
+        if (current50Seconds > last50Seconds)
         {
             IncreaseSpawnRate();
-            lastOneHalfMinute = currentOneHalfMinutes;
+            last50Seconds = current50Seconds;
         }
 
         if (currentBossTime > lastBossTime)
         {
             SpawnBoss();
+        }
+
+        if (enemiesInScene.Count == 0 && timer > 75)
+        {
+            StartCoroutine(enemySpawner.SpawnEnemy());
         }
     }
 
@@ -96,5 +103,30 @@ public class GameTimer : MonoBehaviour
     void SpawnBoss()
     {
         enemySpawner.isBossSpawned = true;
+    }
+
+    void AddEnemyToList()
+    {
+        GameObject[] foundAllEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+
+        foreach (GameObject enemy in foundAllEnemies)
+        {
+            if (enemy != null && !enemiesInScene.Contains(enemy))
+            {
+                enemiesInScene.Add(enemy);
+            }
+        }
+    }
+
+    void RemoveEnemyFromList()
+    {
+        for (int i = enemiesInScene.Count - 1; i >= 0; i--)
+        {
+            if (enemiesInScene[i] == null)
+            {
+                enemiesInScene.RemoveAt(i);
+            }
+        }
     }
 }

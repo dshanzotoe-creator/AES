@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57c45f092ac1cfc4a80046aad78e9e20, type: 3}
   m_Name: BrokenDemon
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  Health: 500
+  Health: 2500
   Damage: 30
   Speed: 6.5
   IsShootingEnemy: 0

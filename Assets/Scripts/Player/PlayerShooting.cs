@@ -60,8 +60,7 @@ public class PlayerShooting : PlayerStats
 
     private void Start()
     {
-        originalShotSpeedCooldown =
-            shotSpeedCooldown;
+        originalShotSpeedCooldown = shotSpeedCooldown;
     }
 
 
@@ -78,14 +77,12 @@ public class PlayerShooting : PlayerStats
 
         if (projectile != null)
         {
-            ProjectileClass projectileClass =
-                projectile.GetComponent<ProjectileClass>();
+            ProjectileClass projectileClass = projectile.GetComponent<ProjectileClass>();
 
 
             if (projectileClass != null)
             {
-                projectileData =
-                    projectileClass.Data;
+                projectileData = projectileClass.Data;
             }
         }
 
@@ -98,12 +95,9 @@ public class PlayerShooting : PlayerStats
                 Time.deltaTime;
 
 
-            if (shotSpeedCooldown <= 0f
-                && !shooting)
+            if (shotSpeedCooldown <= 0f  && !shooting)
             {
-                StartCoroutine(
-                    ShootProjectile()
-                );
+                StartCoroutine( ShootProjectile());
             }
         }
     }
@@ -118,8 +112,7 @@ public class PlayerShooting : PlayerStats
         int projectilesSpawned = 0;
 
 
-        while (projectilesSpawned
-               < projectileData.maxSpawns)
+        while (projectilesSpawned < projectileData.maxSpawns)
         {
             if (enemyToShootAt == null)
             {
@@ -143,9 +136,7 @@ public class PlayerShooting : PlayerStats
         }
 
 
-        shotSpeedCooldown =
-            originalShotSpeedCooldown
-            / projectileSpawnRateModifier;
+        shotSpeedCooldown = originalShotSpeedCooldown / projectileSpawnRateModifier;
 
 
         shooting = false;
@@ -154,14 +145,10 @@ public class PlayerShooting : PlayerStats
 
     void AddEnemyToList()
     {
-        GameObject[] foundAllEnemies =
-            GameObject.FindGameObjectsWithTag(
-                "Enemy"
-            );
+        GameObject[] foundAllEnemies =GameObject.FindGameObjectsWithTag("Enemy");
 
 
-        foreach (GameObject enemy
-                 in foundAllEnemies)
+        foreach (GameObject enemy in foundAllEnemies)
         {
             if (enemy != null
                 && !enemies.Contains(enemy))
@@ -179,14 +166,11 @@ public class PlayerShooting : PlayerStats
         enemyToShootAt = null;
 
 
-        float closestDistance =
-            range;
+        float closestDistance = range;
 
 
        
-        for (int i = enemies.Count - 1;
-             i >= 0;
-             i--)
+        for (int i = enemies.Count - 1;i >= 0; i--)
         {
             if (enemies[i] == null)
             {

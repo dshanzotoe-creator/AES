@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TURWaterBoltData
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileData
   icon: {fileID: 21300000, guid: 5d7f25e57c977bf419cb30620d775e67, type: 3}
-  damage: 7
+  damage: 9
   speed: 0
   lifeTime: 3
   projectileSpawnRate: 0

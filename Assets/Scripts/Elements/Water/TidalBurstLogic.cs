@@ -30,11 +30,17 @@ public class TidalBurstLogic : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.CompareTag("EnemyProjectile")) 
+        { 
+
+            Destroy(collision.gameObject);
+        }
+
+
         if (!collision.CompareTag("Enemy"))
             return;
 
-        collision.GetComponent<EnemyContacts>()
-            .TakeDamage(abData.damage);
+        collision.GetComponent<EnemyContacts>().TakeDamage(abData.damage);
 
         StartCoroutine(KnockbackEnemy(collision.gameObject));
     }

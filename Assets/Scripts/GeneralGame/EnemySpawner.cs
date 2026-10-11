@@ -1,6 +1,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -29,6 +30,9 @@ public class EnemySpawner : MonoBehaviour
     int _maxBossSpawns = 1;
 
     int _currentBossSpawns = 0;
+
+
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -64,9 +68,11 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    
+  
 
-    IEnumerator SpawnEnemy() 
+
+
+    public IEnumerator SpawnEnemy() 
     {
        
         Vector2 spawnPoint = new Vector2();

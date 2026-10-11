@@ -3760,7 +3760,7 @@ MonoBehaviour:
   - {fileID: 5488806396506003864, guid: 5747c2c57f208d442a22e13d6131bc2c, type: 3}
   - {fileID: 7776536262329928907, guid: a4a3d789ea812504f9c80f72d2583991, type: 3}
   - {fileID: 8652914035361334243, guid: 480607e8022d81740b486a751c7a6e8e, type: 3}
-  boss: {fileID: 0}
+  boss: {fileID: 101441288263380237, guid: 465cc37c8479f04448a60aef8c7d2ce7, type: 3}
   _spawnPadding: 2
   maxSpawnIndex: 1
   SpawnRateTimer: 15
