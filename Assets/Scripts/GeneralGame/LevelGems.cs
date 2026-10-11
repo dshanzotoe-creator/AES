@@ -4,11 +4,13 @@ public class LevelGems : MonoBehaviour
 {
     [SerializeField] float range = 4f;
 
+    float maxRange;
+
     float moveSpeed = 10f;
 
     float acceleration = 25f;
 
-    float maxSpeed = 50f;
+    float maxSpeed = 60f;
 
     public float XpGain = 1; 
 
@@ -16,12 +18,16 @@ public class LevelGems : MonoBehaviour
 
     PlayerLevelSystem levelSystem;
 
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
 
         levelSystem = _player.GetComponent<PlayerLevelSystem>();
+
+        maxRange = range * 2;
 
         if (_player == null)
         {
@@ -35,6 +41,7 @@ public class LevelGems : MonoBehaviour
        float _direction = Vector2.Distance(transform.position, _player.transform.position);
 
        maxSpeed = Mathf.MoveTowards(moveSpeed,maxSpeed, acceleration * Time.deltaTime);
+       range = Mathf.MoveTowards(range, maxRange, 2 * Time.deltaTime);
 
         if (_direction <= range)
         {

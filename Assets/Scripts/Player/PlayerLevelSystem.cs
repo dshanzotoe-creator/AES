@@ -2,20 +2,22 @@ using UnityEngine;
 
 public class PlayerLevelSystem : MonoBehaviour
 {
-    [SerializeField] int maxLevel = 15;
+    [SerializeField] int maxLevel = 6;
     [SerializeField] int staringLevel = 1;
     [SerializeField] int currentLevel;
-    [SerializeField] float xpNeededForNextLevel = 10;
+     public float xpNeededForNextLevel = 10;
      public float currentXP;
 
     [SerializeField] UpgradeHandler upgradeHandler;
 
-    
+    HandleXpBar xpBar;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         upgradeHandler = GameObject.Find("GameManager").GetComponent<UpgradeHandler>();
+        xpBar = GameObject.Find("GameManager").GetComponent<HandleXpBar>();
         currentLevel = staringLevel;
         currentXP = 0; 
     }
@@ -24,6 +26,7 @@ public class PlayerLevelSystem : MonoBehaviour
     void Update()
     {
         XpHandler();
+        xpBar.HandleXPBar(xpNeededForNextLevel, currentXP);
     }
 
     void XpHandler()
@@ -37,13 +40,13 @@ public class PlayerLevelSystem : MonoBehaviour
 
             AddLevel();
 
-            if (currentLevel < 10)
+            if (currentLevel < 3)
             {
                 xpNeededForNextLevel *= 1.3f;
             }
             else
             {
-                xpNeededForNextLevel *= 1.37f;          
+                xpNeededForNextLevel *= 1.35f;          
             }
 
              

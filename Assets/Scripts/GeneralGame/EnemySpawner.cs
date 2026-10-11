@@ -1,5 +1,6 @@
 
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -15,15 +16,19 @@ public class EnemySpawner : MonoBehaviour
 
     float _currentSpawnRateTimer;
 
-    float _spawnRateTimer = 20;
+    public int maxSpawnIndex = 1;
 
-    int _maxAmountOfEnemies = 8; 
+    public float SpawnRateTimer = 15;
+
+    public int MaxAmountOfEnemies = 8; 
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         GetBoxColliderCoordinates();
-        _currentSpawnRateTimer = _spawnRateTimer; 
+        StartCoroutine(SpawnEnemy());
+        _currentSpawnRateTimer = SpawnRateTimer; 
 
        
     }
@@ -31,6 +36,9 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
+
 
         if (_currentSpawnRateTimer > 0)
         {
@@ -39,10 +47,9 @@ public class EnemySpawner : MonoBehaviour
         else if (_currentSpawnRateTimer <= 0)
         {
             StartCoroutine(SpawnEnemy());
-            _currentSpawnRateTimer = _spawnRateTimer; 
+            _currentSpawnRateTimer = SpawnRateTimer; 
         }
     }
-
 
     IEnumerator SpawnEnemy() 
     {
@@ -50,7 +57,7 @@ public class EnemySpawner : MonoBehaviour
         Vector2 spawnPoint = new Vector2();
         int enemiesSpawned = 0;
 
-        while (enemiesSpawned != _maxAmountOfEnemies)
+        while (enemiesSpawned != MaxAmountOfEnemies)
         {
             int spawnPlace = Random.Range(1, 5);
             GetCameraLocation();
@@ -77,7 +84,8 @@ public class EnemySpawner : MonoBehaviour
 
             if (IsInPlayerArea(spawnPoint))
             {
-                Instantiate(enemies[0], spawnPoint, Quaternion.identity);
+                int spawnIndex = Random.Range(0,maxSpawnIndex);
+                Instantiate(enemies[spawnIndex], spawnPoint, Quaternion.identity);
                 enemiesSpawned++;
             }
 

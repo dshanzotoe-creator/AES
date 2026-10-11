@@ -20,6 +20,8 @@ public class PlayerElementHandler : MonoBehaviour
 
     public List<GameObject> abilities = new List<GameObject>();
 
+    HandleCurrentElementUI handleCurrentElementUI;
+
 
     private Dictionary<GameObject, ElemntData> abilityOwners
         = new Dictionary<GameObject, ElemntData>();
@@ -28,6 +30,7 @@ public class PlayerElementHandler : MonoBehaviour
     private void Start()
     {
         _originalSwapCooldown = swapCooldown;
+        handleCurrentElementUI = GameObject.Find("GameManager").GetComponent<HandleCurrentElementUI>();
 
         SetOriginalElement();
     }
@@ -35,7 +38,10 @@ public class PlayerElementHandler : MonoBehaviour
 
     private void Update()
     {
+        handleCurrentElementUI.UpdateCurrentElementImage(_currentElement.icon, swapCooldown);
+
         swapCooldown -= Time.deltaTime;
+
 
 
         if (_switchElementAction.WasPressedThisFrame()

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Water
   m_EditorClassIdentifier: Assembly-CSharp::ElemntData
   elementName: Water
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: c9019058c66275f4fb93f9b9701a5cf3, type: 3}
   projectile: {fileID: 3190425810664402777, guid: 66128f848e73626479c1c761eeea1781, type: 3}
   abillities:
   - {fileID: 4737657453239305230, guid: 8373ef3ebce1e1f429466240cd40bfbf, type: 3}
