@@ -10,13 +10,15 @@ public class LevelGems : MonoBehaviour
 
     float acceleration = 25f;
 
-    float maxSpeed = 60f;
+    float maxSpeed = 120f;
 
     public float XpGain = 1; 
 
     private GameObject _player;
 
     PlayerLevelSystem levelSystem;
+
+    PlayerCollision playerCollision;
 
 
 
@@ -27,7 +29,9 @@ public class LevelGems : MonoBehaviour
 
         levelSystem = _player.GetComponent<PlayerLevelSystem>();
 
-        maxRange = range * 2;
+        playerCollision = _player.GetComponent<PlayerCollision>();
+
+        maxRange = range * 5;
 
         if (_player == null)
         {
@@ -41,7 +45,7 @@ public class LevelGems : MonoBehaviour
        float _direction = Vector2.Distance(transform.position, _player.transform.position);
 
        maxSpeed = Mathf.MoveTowards(moveSpeed,maxSpeed, acceleration * Time.deltaTime);
-       range = Mathf.MoveTowards(range, maxRange, 2 * Time.deltaTime);
+       range = Mathf.MoveTowards(range, maxRange, 3 * Time.deltaTime);
 
         if (_direction <= range)
         {
@@ -56,6 +60,7 @@ public class LevelGems : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             levelSystem.currentXP += XpGain;
+            playerCollision.Heal();
             Destroy(this.gameObject);
         }
     }

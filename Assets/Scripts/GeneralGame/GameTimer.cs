@@ -13,6 +13,7 @@ public class GameTimer : MonoBehaviour
     int last40Seconds = 0;
     int lastOneHalfMinute = 0;
     int lastStage = 0;
+    int lastBossTime = 0;
 
 
     private void Awake()
@@ -29,10 +30,16 @@ public class GameTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
+
         timer += Time.deltaTime;
+
+        if (enemySpawner.isBossSpawned) return; 
+
+
         int current40Seconds = Mathf.FloorToInt(timer / 40f);
         int currentOneHalfMinutes = Mathf.FloorToInt(timer / 90f);
-
+        int currentBossTime = Mathf.FloorToInt(timer / 480);
 
         HandleTimerText();
         IncreaseSpawnIndex();
@@ -47,6 +54,11 @@ public class GameTimer : MonoBehaviour
         {
             IncreaseSpawnRate();
             lastOneHalfMinute = currentOneHalfMinutes;
+        }
+
+        if (currentBossTime > lastBossTime)
+        {
+            SpawnBoss();
         }
     }
 
@@ -79,5 +91,10 @@ public class GameTimer : MonoBehaviour
             enemySpawner.maxSpawnIndex++;
             lastStage = stage;
         }
+    }
+
+    void SpawnBoss()
+    {
+        enemySpawner.isBossSpawned = true;
     }
 }

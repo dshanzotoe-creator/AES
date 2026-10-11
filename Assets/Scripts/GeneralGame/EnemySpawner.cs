@@ -11,6 +11,8 @@ public class EnemySpawner : MonoBehaviour
     float boxMinX, boxMinY, boxMaxX, boxMaxY, cameraMinX, cameraMinY, cameraMaxX, cameraMaxY;
 
     [SerializeField] GameObject[] enemies;
+    
+    [SerializeField] GameObject boss;
 
     [SerializeField] float _spawnPadding = 2f;
 
@@ -21,6 +23,12 @@ public class EnemySpawner : MonoBehaviour
     public float SpawnRateTimer = 15;
 
     public int MaxAmountOfEnemies = 8; 
+
+    public bool isBossSpawned = false;
+
+    int _maxBossSpawns = 1;
+
+    int _currentBossSpawns = 0;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -40,16 +48,23 @@ public class EnemySpawner : MonoBehaviour
 
 
 
-        if (_currentSpawnRateTimer > 0)
+        if (_currentSpawnRateTimer > 0 && !isBossSpawned)
         {
             _currentSpawnRateTimer -= Time.deltaTime;
         }
-        else if (_currentSpawnRateTimer <= 0)
+        else if (_currentSpawnRateTimer <= 0 && !isBossSpawned)
         {
             StartCoroutine(SpawnEnemy());
             _currentSpawnRateTimer = SpawnRateTimer; 
         }
+
+        if (isBossSpawned)
+        {
+            StartCoroutine(SpawnEnemy());
+        }
     }
+
+    
 
     IEnumerator SpawnEnemy() 
     {
@@ -82,14 +97,19 @@ public class EnemySpawner : MonoBehaviour
        
             }
 
-            if (IsInPlayerArea(spawnPoint))
+            if (IsInPlayerArea(spawnPoint) && !isBossSpawned)
             {
                 int spawnIndex = Random.Range(0,maxSpawnIndex);
                 Instantiate(enemies[spawnIndex], spawnPoint, Quaternion.identity);
                 enemiesSpawned++;
             }
+            else if (isBossSpawned && _currentBossSpawns != _maxBossSpawns)
+            {
+                Instantiate(boss, spawnPoint, Quaternion.identity);
+                _currentBossSpawns++;
+            }
 
-            Debug.Log(enemiesSpawned);
+                Debug.Log(enemiesSpawned);
             yield return null;
         }
 

@@ -5,7 +5,7 @@ public class PlayerCollision : PlayerStats, IDamageable
 {
     public float _currentHealth;
 
-    float _maxHealth;
+    public float _maxHealth;
 
     SpriteRenderer _spriteRenderer;
 
@@ -38,6 +38,12 @@ public class PlayerCollision : PlayerStats, IDamageable
     void Update()
     {
         Death();
+    }
+
+    public void Heal()
+    {
+      _currentHealth = Mathf.Clamp(_currentHealth + 0.25f, 0, _maxHealth);
+        healthBar.UpdateHealthBar(_maxHealth, _currentHealth);
     }
 
 
