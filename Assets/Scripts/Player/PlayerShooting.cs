@@ -204,24 +204,18 @@ public class PlayerShooting : PlayerStats
 
 
 
-    public void RegisterAbilityProjectile(
-        GameObject abilityProjectile,
-        ElemntData ownerElement)
+    public void RegisterAbilityProjectile( GameObject abilityProjectile, ElemntData ownerElement)
     {
-        if (abilityProjectile == null)
-            return;
+        if (abilityProjectile == null)  return;
 
 
-        if (abilityProjectilePool.Contains(
-                abilityProjectile))
+        if (abilityProjectilePool.Contains(abilityProjectile))
         {
             return;
         }
 
 
-        AbilityProjectile abilityScript =
-            abilityProjectile
-                .GetComponent<AbilityProjectile>();
+        AbilityProjectile abilityScript = abilityProjectile.GetComponent<AbilityProjectile>();
 
 
         if (abilityScript == null
@@ -253,8 +247,7 @@ public class PlayerShooting : PlayerStats
 
 
 
-    public void SetActiveElement(
-        ElemntData element)
+    public void SetActiveElement(ElemntData element)
     {
 
 
@@ -264,8 +257,7 @@ public class PlayerShooting : PlayerStats
 
     void HandleAbilityProjectiles()
     {
-        foreach (GameObject abilityProjectile
-                 in abilityProjectilePool)
+        foreach (GameObject abilityProjectile in abilityProjectilePool)
         {
             if (abilityProjectile == null)
                 continue;

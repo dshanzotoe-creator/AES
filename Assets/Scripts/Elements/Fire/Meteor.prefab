@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2153694724288620939}
   - component: {fileID: 4733883816338848782}
-  - component: {fileID: -305764687437656224}
   - component: {fileID: 6251341827437226783}
   - component: {fileID: 7438657788451123818}
   - component: {fileID: 9061302979359798533}
@@ -30,13 +29,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8876221664941312568}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.028620943, w: 0.99959034}
+  m_LocalRotation: {x: 0, y: 0, z: 0.028619478, w: 0.9995904}
   m_LocalPosition: {x: 1.7716216, y: 10.956837, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 3.28}
 --- !u!114 &4733883816338848782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49,21 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed5ca6c13d95da4479c3bd5e75ed653d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeteorLogic
-  projectileData: {fileID: 11400000, guid: eea424654ed113949b78a8fb1f06b30f, type: 2}
   abData: {fileID: 11400000, guid: 7120d476795128441852a44a819c7d28, type: 2}
---- !u!114 &-305764687437656224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8876221664941312568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b884b1c2aa5c21043b1fef2278e0819d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AbilityProjectile
-  abilityData: {fileID: 11400000, guid: 7120d476795128441852a44a819c7d28, type: 2}
+  lifeTime: 1.5
+  speed: 60
 --- !u!212 &6251341827437226783
 SpriteRenderer:
   serializedVersion: 3

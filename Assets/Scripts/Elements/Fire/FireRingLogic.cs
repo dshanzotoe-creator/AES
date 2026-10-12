@@ -6,9 +6,6 @@ public class FireRingLogic : AbilityClass
     [SerializeField] AbilityData data;
 
     [SerializeField] float rotationSpeed = 180.0f;
-
-    GameObject player; 
-
     SpriteRenderer sprite;
 
     Dictionary<GameObject, float> nextHitTime = new Dictionary<GameObject, float>();

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileData
   icon: {fileID: 0}
   damage: 0
-  speed: 15
+  speed: 17
   lifeTime: 4
   projectileSpawnRate: 0
   maxSpawns: 0
+  collideAmount: 0

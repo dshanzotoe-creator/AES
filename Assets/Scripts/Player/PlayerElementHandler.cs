@@ -107,10 +107,7 @@ public class PlayerElementHandler : MonoBehaviour
     GameObject ability,
     ElemntData ownerElement)
     {
-        GameObject spawnedAbility = Instantiate(
-            ability,
-            transform.position,
-            Quaternion.identity
+        GameObject spawnedAbility = Instantiate(ability,transform.position,Quaternion.identity
         );
 
         abilities.Add(spawnedAbility);
@@ -122,16 +119,12 @@ public class PlayerElementHandler : MonoBehaviour
         );
 
 
-        AbilityProjectile abilityProjectile =
-            spawnedAbility.GetComponent<AbilityProjectile>();
+        AbilityProjectile abilityProjectile = spawnedAbility.GetComponent<AbilityProjectile>();
 
 
         if (abilityProjectile != null)
         {
-            _playerShooting.RegisterAbilityProjectile(
-                spawnedAbility,
-                ownerElement
-            );
+            _playerShooting.RegisterAbilityProjectile( spawnedAbility, ownerElement);
 
             return;
         }
@@ -163,8 +156,7 @@ public class PlayerElementHandler : MonoBehaviour
                 continue;
 
 
-            AbilityProjectile abilityProjectile =
-                ability.GetComponent<AbilityProjectile>();
+            AbilityProjectile abilityProjectile = ability.GetComponent<AbilityProjectile>();
 
 
             if (abilityProjectile != null)

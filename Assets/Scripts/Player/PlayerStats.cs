@@ -14,8 +14,9 @@ public class PlayerStats : MonoBehaviour
 
     protected float rangeModifier;
 
-    protected float projectileSpawnRateModifier; 
+    protected float projectileSpawnRateModifier;
 
+    protected float abilityCooldownModifier;
     protected virtual void Awake()
     {
         movementSpeed = 5.0f;
@@ -31,5 +32,7 @@ public class PlayerStats : MonoBehaviour
         rangeModifier = 1f;
 
         projectileSpawnRateModifier = 1f;
+
+        abilityCooldownModifier = 1f;
     }
 }

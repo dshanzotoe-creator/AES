@@ -30,13 +30,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4737657453239305230}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.028620943, w: 0.99959034}
+  m_LocalRotation: {x: 0, y: 0, z: 0.028619478, w: 0.9995904}
   m_LocalPosition: {x: 1.7716216, y: 10.956837, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 3.28}
 --- !u!212 &5324124217871897602
 SpriteRenderer:
   serializedVersion: 3
@@ -112,8 +112,8 @@ MonoBehaviour:
   projectileData: {fileID: 11400000, guid: 27b4ed50e811b954d857b1b2ef4a48be, type: 2}
   abilityData: {fileID: 11400000, guid: ca3b2f5e891bf2b44b20c8fdc5787448, type: 2}
   pullSpeed: 4
-  pullRadius: 3
-  timeBetweenHits: 1
+  pullRadius: 8
+  timeBetweenHits: 0.8
 --- !u!58 &4596400898600151419
 CircleCollider2D:
   m_ObjectHideFlags: 0

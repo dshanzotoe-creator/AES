@@ -63,7 +63,7 @@ public class GameTimer : MonoBehaviour
             SpawnBoss();
         }
 
-        if (enemiesInScene.Count == 0 && timer > 75)
+        if (enemiesInScene.Count == 0)
         {
             StartCoroutine(enemySpawner.SpawnEnemy());
         }
@@ -80,12 +80,13 @@ public class GameTimer : MonoBehaviour
 
     void IncreaseMaximumSpawns()
     {
-        if (enemySpawner.MaxAmountOfEnemies < 18) enemySpawner.MaxAmountOfEnemies += 2;
+        if (enemySpawner.MaxAmountOfEnemies < 48) enemySpawner.MaxAmountOfEnemies += 4;
     }
 
     void IncreaseSpawnRate()
     {
-        if (enemySpawner.SpawnRateTimer > 5) enemySpawner.SpawnRateTimer -= 3;
+        if (enemySpawner.SpawnRateTimer > 3) enemySpawner.SpawnRateTimer -= 3;
+        
     }
 
     void IncreaseSpawnIndex()

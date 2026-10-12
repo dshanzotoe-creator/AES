@@ -16,5 +16,5 @@ MonoBehaviour:
   abilityDescription: Spawn a tidal burst around the player that pushes back enemys
     and destroys enemy  bullets.
   damage: 15
-  cooldown: 0.3
+  cooldown: 0.25
   icon: {fileID: 21300000, guid: bb2a7784c5aec5a47bd3dff163714b91, type: 3}

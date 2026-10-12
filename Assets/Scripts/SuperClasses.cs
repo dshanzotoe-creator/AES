@@ -52,7 +52,7 @@ public class ProjectileClass : MonoBehaviour
 
 public class AbilityClass : MonoBehaviour
 {
-    GameObject player;
+    protected GameObject player;
 
     public virtual void Update()
     {
