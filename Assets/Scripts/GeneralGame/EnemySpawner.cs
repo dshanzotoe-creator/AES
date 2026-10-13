@@ -59,7 +59,7 @@ public class EnemySpawner : MonoBehaviour
             _currentSpawnRateTimer = SpawnRateTimer; 
         }
 
-        if (isBossSpawned)
+        if (isBossSpawned && _currentBossSpawns < _maxBossSpawns)
         {
             StartCoroutine(SpawnEnemy());
         }
@@ -75,7 +75,7 @@ public class EnemySpawner : MonoBehaviour
         Vector2 spawnPoint = new Vector2();
         int enemiesSpawned = 0;
 
-        while (enemiesSpawned != MaxAmountOfEnemies)
+        while (enemiesSpawned < MaxAmountOfEnemies && (!isBossSpawned || _currentBossSpawns < _maxBossSpawns))
         {
             int spawnPlace = Random.Range(1, 5);
             GetCameraLocation();

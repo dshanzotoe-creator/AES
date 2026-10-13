@@ -11,8 +11,8 @@ public class GameTimer : MonoBehaviour
     float timer = 0;
 
 
+    int last20Seconds = 0;
     int last30Seconds = 0;
-    int last50Seconds = 0;
     int lastStage = 0;
     int lastBossTime = 0;
 
@@ -31,31 +31,30 @@ public class GameTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        timer += Time.deltaTime;
-
         if (enemySpawner.isBossSpawned) return;
+    
+        timer += Time.deltaTime;
 
         AddEnemyToList();
         RemoveEnemyFromList();
         
+        int current20Seconds = Mathf.FloorToInt(timer / 20f);
         int current30Seconds = Mathf.FloorToInt(timer / 30f);
-        int current50Seconds = Mathf.FloorToInt(timer / 50f);
-        int currentBossTime = Mathf.FloorToInt(timer / 480);
+        int currentBossTime = Mathf.FloorToInt(timer / 300);
 
         HandleTimerText();
         IncreaseSpawnIndex();
 
-        if (current30Seconds > last30Seconds)
+        if (current20Seconds > last20Seconds)
         {
             IncreaseMaximumSpawns();
-            last30Seconds = current30Seconds;
+            last20Seconds = current20Seconds;
         }
 
-        if (current50Seconds > last50Seconds)
+        if (current30Seconds > last30Seconds)
         {
             IncreaseSpawnRate();
-            last50Seconds = current50Seconds;
+            last30Seconds = current30Seconds;
         }
 
         if (currentBossTime > lastBossTime)
@@ -63,7 +62,7 @@ public class GameTimer : MonoBehaviour
             SpawnBoss();
         }
 
-        if (enemiesInScene.Count == 0)
+        if (enemiesInScene.Count == 0 && !enemySpawner.isBossSpawned)
         {
             StartCoroutine(enemySpawner.SpawnEnemy());
         }
@@ -80,7 +79,7 @@ public class GameTimer : MonoBehaviour
 
     void IncreaseMaximumSpawns()
     {
-        if (enemySpawner.MaxAmountOfEnemies < 48) enemySpawner.MaxAmountOfEnemies += 4;
+        if (enemySpawner.MaxAmountOfEnemies < 30) enemySpawner.MaxAmountOfEnemies += 3;
     }
 
     void IncreaseSpawnRate()

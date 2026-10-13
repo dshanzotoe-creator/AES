@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BubbleTurrentHandlerScript
   bubblePrefab: {fileID: 8473694979427023093, guid: 8cb130dfef5ed40418b4e95a78c3752a, type: 3}
-  spawnCooldown: 3
+  spawnCooldown: 2.25
 --- !u!114 &5012110384693439858
 MonoBehaviour:
   m_ObjectHideFlags: 0

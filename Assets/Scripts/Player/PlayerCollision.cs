@@ -42,7 +42,7 @@ public class PlayerCollision : PlayerStats, IDamageable
 
     public void Heal()
     {
-      _currentHealth = Mathf.Clamp(_currentHealth + 0.25f, 0, _maxHealth);
+      _currentHealth = Mathf.Clamp(_currentHealth + 0.15f, 0, _maxHealth);
         healthBar.UpdateHealthBar(_maxHealth, _currentHealth);
     }
 
@@ -92,11 +92,7 @@ public class PlayerCollision : PlayerStats, IDamageable
         if(_currentHealth <= 0)
         {
             _spriteRenderer.sprite = tombstoneSprite;
-            Time.timeScale = 0f;
 
-            // Change the tag to "Untagged" to prevent further collisions
-
-            //End Game Logic Since It Is The Player
         }
     }
 }

@@ -142,5 +142,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d29296fab9612b346ae5a269db85ac2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelGems
-  range: 3
-  XpGain: 1
+  range: 4
+  XpGain: 0.8

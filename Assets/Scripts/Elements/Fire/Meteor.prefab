@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MeteorLogic
   abData: {fileID: 11400000, guid: 7120d476795128441852a44a819c7d28, type: 2}
   lifeTime: 1.5
-  speed: 60
+  speed: 80
 --- !u!212 &6251341827437226783
 SpriteRenderer:
   serializedVersion: 3

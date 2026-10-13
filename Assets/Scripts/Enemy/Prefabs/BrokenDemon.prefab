@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 4083922759329916380}
   - component: {fileID: 8354948099749075176}
   - component: {fileID: 1347455201232885778}
+  - component: {fileID: 9018559991177555285}
+  - component: {fileID: 1527023783877962388}
   m_Layer: 0
   m_Name: BrokenDemon
   m_TagString: Enemy
@@ -62,7 +64,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5.2
+  m_Speed: 5.3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -219,3 +221,35 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &9018559991177555285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101441288263380237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4173cd28ec59d83448c7a9f8a194be90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyBossLogic
+  agent: {fileID: 0}
+  range: 9
+  bulletSpeed: 18
+  shootCoolDown: 1
+  maxShotTimes: 5
+  bulletPrefab: {fileID: 4945224062726156073, guid: b2b065deb5c4be247975b3c5f3921925, type: 3}
+--- !u!114 &1527023783877962388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101441288263380237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9826045f55d8e994a944c9c4d2766345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyShoot
+  bulletPrefab: {fileID: 4945224062726156073, guid: 7a552d14a5449844c816cf6778629311, type: 3}
+  bulletCooldown: 1

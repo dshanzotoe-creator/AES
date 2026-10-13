@@ -49,9 +49,9 @@ public class TidalBurstLogic : MonoBehaviour
     {
         NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
 
-        if (agent != null)
+        if (agent != null && agent.enabled == true)
         {
-            agent.ResetPath();
+            agent.ResetPath();  
             agent.enabled = false;
         }
 
