@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameTimer : MonoBehaviour
 {
@@ -31,12 +32,18 @@ public class GameTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        AddEnemyToList();
+
+        RemoveEnemyFromList();
+
+        if (enemiesInScene.Count == 0 && enemySpawner.isBossSpawned)
+        {
+            EndGame();
+        }
         if (enemySpawner.isBossSpawned) return;
     
         timer += Time.deltaTime;
-
-        AddEnemyToList();
-        RemoveEnemyFromList();
         
         int current20Seconds = Mathf.FloorToInt(timer / 20f);
         int current30Seconds = Mathf.FloorToInt(timer / 30f);
@@ -66,6 +73,7 @@ public class GameTimer : MonoBehaviour
         {
             StartCoroutine(enemySpawner.SpawnEnemy());
         }
+      
     }
 
     void HandleTimerText()
@@ -128,5 +136,13 @@ public class GameTimer : MonoBehaviour
                 enemiesInScene.RemoveAt(i);
             }
         }
+    }
+
+    void EndGame()
+    {
+        ScoreHandler _scoreHandler = GameObject.Find("GameManager").GetComponent<ScoreHandler>();
+        _scoreHandler.CheckAndSetEnemiesKilled();
+        PlayerPrefs.Save();
+        SceneManager.LoadScene("MainMenu");
     }
 }

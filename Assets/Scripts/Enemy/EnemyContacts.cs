@@ -38,7 +38,7 @@ public class EnemyContacts : MonoBehaviour, IDamageable
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
         {
@@ -55,6 +55,8 @@ public class EnemyContacts : MonoBehaviour, IDamageable
     public void Death()
     {
         GameObject xpGem = Instantiate(XPGem, transform.position, Quaternion.identity);
+        ScoreHandler _scoreHandler = GameObject.Find("GameManager").GetComponent<ScoreHandler>();
+        _scoreHandler.totalEnemiesKilled += 1;
         Destroy(this.gameObject);
     }
 }

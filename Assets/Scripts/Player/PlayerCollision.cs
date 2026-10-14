@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCollision : PlayerStats, IDamageable
 {
@@ -92,7 +93,8 @@ public class PlayerCollision : PlayerStats, IDamageable
         if(_currentHealth <= 0)
         {
             _spriteRenderer.sprite = tombstoneSprite;
-
+            SceneManager.LoadScene("MainMenu");
+            PlayerPrefs.Save();
         }
     }
 }
