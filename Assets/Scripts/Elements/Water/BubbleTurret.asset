@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BubbleTurret
   m_EditorClassIdentifier: Assembly-CSharp::AbilityData
   abilityName: BubbleTurret
-  abilityDescription: Periodically spawn a bubble turret that shoots out bullets!
+  abilityDescription: Spawn a bubble turret(s) that shoots out bullets!
   damage: 0
   cooldown: 14
   icon: {fileID: 21300000, guid: 68b01ef0dea953946af02551de5489a0, type: 3}

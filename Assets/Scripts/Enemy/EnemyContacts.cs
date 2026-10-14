@@ -33,7 +33,7 @@ public class EnemyContacts : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
- 
+        DamageManager.Instance.ShowDamage(damage, transform.position);
         currentHealth -= damage;
     }
 
